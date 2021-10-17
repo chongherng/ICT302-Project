@@ -1,7 +1,4 @@
-<head>
-    <body>
-            <style>
-            .backround {
+.backround {
               background-image: url("https://drive.google.com/uc?export=view&id=17umgBGM1lX6iTrKjKxGASOrCCbH37d0R");
               background-size: auto;
               width: 50%;
@@ -64,24 +61,3 @@
             background-color: #29ac29; /* Green */
             color:#FFFFFF;
             }
-            </style>
-            <div class="container">
-            <div class="backround">
-                <div class="relative">
-                    <p class="p1"> Murdoch University</p>
-                   <div class="relative1">
-                <p class="p2">Student Request Portal</p>
-                     <div class="relative2">
-                <a href="#" class="button">Student Requests</a>
-                         <div class="relative3">
-                    <a href="#" class="button">Staff Portal</a>
-                      </div>
-                        </div>
-                    </div>
-                 </div>
-             </div>                           
-             </div>
-            
-    </body>
-
-</head>
