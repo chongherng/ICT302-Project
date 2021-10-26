@@ -1,6 +1,12 @@
 # ICT302-Project
 
 ## Commands
+Install dependencies
+```shell
+# run on terminal
+npm install
+```
+
 Use this command to start the server
 
 ```shell
