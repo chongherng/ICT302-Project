@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const setup = require('./setup');
 
 const routes = require('./routes/home');
 
-// view engine setup
+// Setup Database
+    setup();
+
+// View engine setup
 app.set("view engine", "ejs");
 app.use(logger);
 
