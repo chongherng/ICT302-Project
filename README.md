@@ -7,6 +7,12 @@ Install dependencies
 npm install
 ```
 
+Setup database
+```shell
+# run on terminal
+node setup.js
+```
+
 Use this command to start the server
 
 ```shell
