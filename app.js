@@ -4,7 +4,8 @@ const path = require("path");
 
 const routes = require('./routes/home');
 
-// view engine setup
+
+// View engine setup
 app.set("view engine", "ejs");
 app.use(logger);
 
