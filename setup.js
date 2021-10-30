@@ -34,7 +34,7 @@ const setupDatabase = () => {
     });
 
     // Request Table
-    sql = "CREATE TABLE Request (r_ID VARCHAR(8) PRIMARY KEY, r_type VARCHAR(30) NOT NULL, r_description VARCHAR(100), r_documentpath VARCHAR(255) NOT NULL, r_dateofrequest DATE  NOT NULL, r_status VARCHAR(30) NOT NULL, r_duedate DATE NOT NULL, s_ID VARCHAR(8), sss_ID VARCHAR(8), sam_ID VARCHAR(10), as_ID VARCHAR(10), FOREIGN KEY (s_ID) REFERENCES Student(s_ID), FOREIGN KEY (sss_ID) REFERENCES StudentSupportStaff(sss_ID), FOREIGN KEY (sam_ID) REFERENCES SAM(sam_ID), FOREIGN KEY (as_ID) REFERENCES AcademicStaff(as_ID))";
+    sql = "CREATE TABLE Request (r_ID VARCHAR(8) PRIMARY KEY, r_type VARCHAR(30) NOT NULL, r_description VARCHAR(100), r_documentpath VARCHAR(255) NOT NULL, r_dateofrequest DATE  NOT NULL, r_status VARCHAR(30) NOT NULL, r_duedate DATE NOT NULL, r_comments VARCHAR(255), s_ID VARCHAR(8), sss_ID VARCHAR(8), sam_ID VARCHAR(10), as_ID VARCHAR(10), FOREIGN KEY (s_ID) REFERENCES Student(s_ID), FOREIGN KEY (sss_ID) REFERENCES StudentSupportStaff(sss_ID), FOREIGN KEY (sam_ID) REFERENCES SAM(sam_ID), FOREIGN KEY (as_ID) REFERENCES AcademicStaff(as_ID))";
     con.query(sql, function (err, result) {
       err ? console.log(err.sqlMessage) : console.log("Request table created");
     });
