@@ -1,30 +1,33 @@
+
              div.relative {
              position: relative;
-             left: 125%;
+             left: 50%;
              top: 10%;
             }
             div.relative1 {
              position: relative;
-             left: 50px;
-             top: -50px;
+             left: 230px;
+             top: 140px;
              }
             div.relative2 {
              position: relative;
-             left: -100px;
-             top: 500px;
+             left: 480px;
+             top: 360px;
             }
             div.relative3 {
                 position: relative;
-                top: 25px;
+                left:200px;
+                top: 225px;
                }
             div.relative4 {
-             position: relative;
-             top: 25px;
+             position: absolute;
+             top: 0px;
+             left: 450px;
             }
             div.relative5 {
-                position: relative;
-                left: 125%;
-                top: 90px;
+                position: absolute;
+                top: 0px;
+                left: 450px;
                }
                div.relative6 {
                 position: relative;
@@ -259,27 +262,59 @@
                     background-color: #29ac29; /* Green */
                     color:#FFFFFF;
                 }
-            body{
-                background-image: url(../img/murdoch_logo.png);
-                background-repeat: no-repeat;
-                width: 50%;
-                position: relative;
-                left: 0px;
-                height: 100%;
-                overflow-x:hidden;
-             overflow-y: hidden;
-            }
+                * {
+                  margin: 0;
+                  padding: 0;
+                }
+                header
+                {
+                  margin: 0;
+                  padding: 0;
+                  width:100%;
+                  height:100px;
+                  background-color:#e31b3f;
+                  z-index: -1;
+                }
+                .logo
+                {
+                  margin: 0;
+                  padding: 0;
+                background:url(../img/Murdoch_logo-Pink.jpg);
+                width:200px;
+                height:100px;
+                z-index: 1;
+                position:relative;
+                 background-size: contain;
+                }
+              
+                .requestlogo
+                {
+                   position: relative;
+                  
+                }
+                .logoutlogo
+                {
+                  position: relative;
+                }
+                body{
+                  overflow-x:hidden;
+                  overflow-y: hidden;
+                }
             .p1 {
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
-            font-size:50px;
-            color:#f03030;
-            }
-            .p2 {
             font-family: Arial, Helvetica, sans-serif;
             font-weight: bold;
             font-size:30px;
             color:black;
+            }
+            .p2 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size:25px;
+            position:absolute;
+            left:2%;
+            top:10%;
+            color:black;
+             
             }
             .p3{
               font-family: Arial, Helvetica, sans-serif;
@@ -294,25 +329,241 @@
               text-align: center;
               color:black;
             }
+            .white-box {
+              background-color:none;
+                    border:2px solid #000000;
+                    color: black;
+                    padding: 3px 20px;
+                    text-align: left;
+                    text-decoration: none;
+                    white-space: normal;
+                    display: inline-block;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-weight: bold;
+                    font-size:20px;
+                    margin: 4px 2px;
+                    border-radius: 12px;
+              left:200px;
+              top:180px;
+             height:600px;
+             width:1200px;
+             position: relative;
+          }
             .button {
-            background-color: #e31b3f;
-            border: none;
-            color: white;
-            padding: 15px 40px;
-            width: 500px;
-            text-align: center;
-            text-decoration: none;
-            white-space: normal;
-            display: inline-block;
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
-            font-size:20px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 12px;
-            transition-duration: 0.4s;
+              background-color: #e31b3f;
+              border: none;
+              color: white;
+              padding: 15px 30px;
+              width: 300px;
+              text-align: center;
+              text-decoration: none;
+              white-space: normal;
+              display: inline-block;
+              font-family: Arial, Helvetica, sans-serif;
+              font-weight: bold;
+              font-size:20px;
+              margin: 4px 2px;
+              cursor: pointer;
+              border-radius: 12px;
+              transition-duration: 0.4s;
             }       
-            .button:hover {
-            background-color: #29ac29; /* Green */
-            color:#FFFFFF;
-            }
+            .button2 {
+              background-color: #e31b3f;
+              border: none;
+              color: white;
+              padding: 15px 30px;
+              width: 250px;
+              text-align: center;
+              text-decoration: none;
+              white-space: normal;
+              display: inline-block;
+              font-family: Arial, Helvetica, sans-serif;
+              font-weight: bold;
+              font-size:20px;
+              margin: 4px 2px;
+              cursor: pointer;
+              border-radius: 12px;
+              transition-duration: 0.4s;
+              }
+              .button3{
+                background-color: #29ac29;
+              border: none;
+              color: white;
+              padding: 15px 30px;
+              width: 300px;
+              text-align: center;
+              text-decoration: none;
+              white-space: normal;
+              display: inline-block;
+              font-family: Arial, Helvetica, sans-serif;
+              font-weight: bold;
+              font-size:20px;
+              margin: 4px 2px;
+              cursor: pointer;
+              border-radius: 12px;
+              transition-duration: 0.4s;
+              }     
+              .button4{
+                background-color:grey;
+              border: none;
+              color: white;
+              padding: 15px 30px;
+              width: 300px;
+              text-align: center;
+              text-decoration: none;
+              white-space: normal;
+              display: inline-block;
+              font-family: Arial, Helvetica, sans-serif;
+              font-weight: bold;
+              font-size:20px;
+              margin: 4px 2px;
+              cursor: pointer;
+              border-radius: 12px;
+              transition-duration: 0.4s;
+              }  
+              @import url('https://fonts.googleapis.com/css?family=Varela+Round');
+              html, body {
+                  overflow-x: hidden;
+                  height: 100%;
+              }
+              body {
+                  background: #fff;
+                  padding: 0;
+                  margin: 0;
+                  font-family: 'Varela Round', sans-serif;
+              }
+              .header2 {
+                margin: 0;
+                padding: 0;
+                width:100%;
+                height:100px;
+                background-color:#e31b3f;
+                z-index: -1;
+                    position: fixed;
+                  
+                  overflow: hidden;
+              
+              }
+              .main {
+                  margin: 0 auto;
+                  display: block;
+                  height: 100%;
+                  margin-top: 60px;
+              }
+              .mainInner{
+                  display: table;
+                  height: 100%;
+                  width: 100%;
+                  text-align: center;
+              }
+              .mainInner div{
+                  display:table-cell;
+                  vertical-align: middle;
+                  font-size: 3em;
+                  font-weight: bold;
+                  letter-spacing: 1.25px;
+              }
+              #sidebarMenu {
+                  height: 100%;
+                  position: fixed;
+                  right: 0px;
+                  width: 250px;
+                  margin-top: 100px;
+                  transform: translateX(250px);
+                  transition: transform 250ms ease-in-out;
+                  background: #e31b3f;
+              }
+              .sidebarMenuInner{
+                  margin:0;
+                  padding:0;
+                  border-top: 1px solid rgba(255, 255, 255, 0.10);
+              }
+              .sidebarMenuInner li{
+                
+                  list-style: none;
+                  color: #fff;
+                  text-transform: uppercase;
+                  font-weight: bold;
+                  padding: 20px;
+                  cursor: pointer;
+                  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+              }
+              .sidebarMenuInner li span{
+                  display: block;
+                  font-size: 14px;
+                  color: rgba(255, 255, 255, 0.50);
+              }
+              .sidebarMenuInner li a{
+                  color: #fff;
+                  text-transform: uppercase;
+                  font-weight: bold;
+                  cursor: pointer;
+                  text-decoration: none;
+              }
+              input[type="checkbox"]:checked ~ #sidebarMenu {
+                  transform: translateX(0);
+              }
+              
+              input[type=checkbox] {
+                  transition: all 0.3s;
+                  box-sizing: border-box;
+                  display: none;
+              }
+              .sidebarIconToggle {
+                  transition: all 0.3s;
+                  box-sizing: border-box;
+                  cursor: pointer;
+                  position: absolute;
+                  z-index: 99;
+                  height: 100%;
+                  width: 100%;
+                  top: 22px;
+                  right: 15px;
+                  height: 22px;
+                  width: 22px;
+              }
+              .spinner {
+                  transition: all 0.3s;
+                  box-sizing: border-box;
+                  position: absolute;
+                  height: 3px;
+                  width: 100%;
+                  background-color: #fff;
+              }
+              .horizontal {
+                  transition: all 0.3s;
+                  box-sizing: border-box;
+                  position: relative;
+                  float: left;
+                  margin-top: 3px;
+              }
+              .diagonal.part-1 {
+                  position: relative;
+                  transition: all 0.3s;
+                  box-sizing: border-box;
+                  float: left;
+              }
+              .diagonal.part-2 {
+                  transition: all 0.3s;
+                  box-sizing: border-box;
+                  position: relative;
+                  float: left;
+                  margin-top: 3px;
+              }
+              input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+                  transition: all 0.3s;
+                  box-sizing: border-box;
+                  opacity: 0;
+              }
+              input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+                  transition: all 0.3s;
+                  box-sizing: border-box;
+                  transform: rotate(135deg);
+                  margin-top: 8px;
+              }
+              input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+                  transition: all 0.3s;
+                  box-sizing: border-box;
+                  transform: rotate(-135deg);
+                  margin-top: -9px;
+              }
