@@ -4,6 +4,9 @@ const path = require("path");
 
 const home = require('./routes/home');
 const request = require('./routes/request');
+const staff = require('./routes/staff');
+
+app.use(express.urlencoded({ extended: false }));
 
 // View engine setup
 app.set("view engine", "ejs");
@@ -14,7 +17,7 @@ app.use(express.static("public"));
 
 app.use('/', home);
 app.use('/request', request);
-
+app.use('/staff', staff);
 
 function logger(req, res, next) {
     console.log("Request for " + req.originalUrl);
