@@ -38,7 +38,7 @@ var SAMValues = [
 // password for AS1: aspassword123
 var ASValues = [
   [
-    "3312345678",
+    "3374875962",
     "Joey",
     "Lim",
     "1986-04-12",
@@ -47,7 +47,7 @@ var ASValues = [
     "$2b$10$fm7/5ltWFYjj9tvL.yl7g.WJB78nYdWM8ggvHwHAIBPw9iTv/0gQ.",
   ],
   [
-    "3387654321",
+    "3387622321",
     "Jim",
     "Doe",
     "1985-06-15",
