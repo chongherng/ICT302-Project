@@ -1,5 +1,4 @@
 const mysql = require("mysql");
-const bcrypt = require("bcrypt");
 
 var studentValues = [
   ["33457986", "Ember", "Thad", "1996-08-03", "ember_thad@gmail.com","87948875","ICT302, ICT167"],
@@ -92,7 +91,7 @@ const setupDatabase =  () => {
 
     // SAM Table
     sql =
-      "CREATE TABLE SAM (sam_ID VARCHAR(10) PRIMARY KEY, sam_fname VARCHAR(50) NOT NULL, sam_lname VARCHAR(30) NOT NULL, sam_birthday DATE NOT NULL, sam_email VARCHAR(100) NOT NULL, sam_phoneNo VARCHAR(8) NOT NULL, sam_password VARCHAR(255) NOT NULL)";
+      "CREATE TABLE SAM (sam_ID VARCHAR(10) PRIMARY KEY, sam_fname VARCHAR(50) NOT NULL, sam_lname VARCHAR(30) NOT NULL, sam_birthday DATE NOT NULL, sam_email VARCHAR(100) NOT NULL, sam_phoneNo VARCHAR(8) NOT NULL, password VARCHAR(255) NOT NULL)";
     con.query(sql, function (err, result) {
       err ? console.log(err.sqlMessage) : console.log("SAM table created");
     });
@@ -106,7 +105,7 @@ const setupDatabase =  () => {
 
     // Academic Staff Table
     sql =
-      "CREATE TABLE AcademicStaff (as_ID VARCHAR(10) PRIMARY KEY, as_fname VARCHAR(50) NOT NULL, as_lname VARCHAR(30) NOT NULL, as_birthday DATE NOT NULL, as_email VARCHAR(100) NOT NULL, as_phoneNo VARCHAR(8) NOT NULL, as_password VARCHAR(255) NOT NULL)";
+      "CREATE TABLE AcademicStaff (as_ID VARCHAR(10) PRIMARY KEY, as_fname VARCHAR(50) NOT NULL, as_lname VARCHAR(30) NOT NULL, as_birthday DATE NOT NULL, as_email VARCHAR(100) NOT NULL, as_phoneNo VARCHAR(8) NOT NULL, password VARCHAR(255) NOT NULL)";
     con.query(sql, function (err, result) {
       err
         ? console.log(err.sqlMessage)
