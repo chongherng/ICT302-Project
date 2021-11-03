@@ -1,16 +1,30 @@
 const express = require("express");
+const passport = require("passport");
 const router = express.Router();
 const path = require("path");
 
-const authUser = require('../controllers/authController');
+const initializePassport = require("../controllers/authController");
+initializePassport(passport);
 
 // Get Staff login page
-router.get("/login.html", (req, res) => {
+router.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/views/staff-login.html"));
 });
 
-router.post("/auth", async (req, res) => {
-  await authUser(req, res)
+router.post(
+  "/auth",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/staff/login",
+    failureFlash: true,
+  })
+);
+
+router.delete('/logout', (req, res) => {
+  req.logOut();
+  res.redirect('/');
 })
+
+
 
 module.exports = router;
