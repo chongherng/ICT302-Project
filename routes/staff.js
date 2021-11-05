@@ -11,7 +11,7 @@ router.get("/login", (req, res) => {
   res.render("staff-login.ejs");
 });
 
-router.post("/auth", function (req, res, next) {
+router.post("/login", function (req, res, next) {
   passport.authenticate("local", function (err, user, info) {
     if (err) {
       return next(err);
