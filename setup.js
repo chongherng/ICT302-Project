@@ -21,6 +21,7 @@ var SAMValues = [
     "1980-04-12",
     "JaniceTeo321@test.com",
     "87549965",
+    "SAM",
     "$2b$10$hthekxa4i0qbNCr3zRtn8etgXw2W73GuAWxHqLoL.GzKN8mnRJuvG",
   ],
   [
@@ -30,6 +31,7 @@ var SAMValues = [
     "1983-06-15",
     "JohnDoe@test.com",
     "87456235",
+    "SAM",
     "$2b$10$E4uEZFH/gGWFbrZbu22TsuySzxFVii2Nh0XqRN/6uyakOaCEmhreO",
   ],
 ];
@@ -44,6 +46,7 @@ var ASValues = [
     "1986-04-12",
     "JoeyLim@test.com",
     "87549925",
+    "AS",
     "$2b$10$fm7/5ltWFYjj9tvL.yl7g.WJB78nYdWM8ggvHwHAIBPw9iTv/0gQ.",
   ],
   [
@@ -53,6 +56,7 @@ var ASValues = [
     "1985-06-15",
     "JimDoe@test.com",
     "87456211",
+    "AS",
     "$2b$10$ZtAke8ktmKLU2wEPW7dp.ut6N83TzGye9Sntxs2PnOPwZ1a21Nxxe",
   ],
 ];
@@ -92,7 +96,7 @@ const setupDatabase =  () => {
 
     // SAM Table
     sql =
-      "CREATE TABLE SAM (sam_ID VARCHAR(10) PRIMARY KEY, sam_fname VARCHAR(50) NOT NULL, sam_lname VARCHAR(30) NOT NULL, sam_birthday DATE NOT NULL, sam_email VARCHAR(100) NOT NULL, sam_phoneNo VARCHAR(8) NOT NULL, password VARCHAR(255) NOT NULL)";
+      "CREATE TABLE SAM (sam_ID VARCHAR(10) PRIMARY KEY, sam_fname VARCHAR(50) NOT NULL, sam_lname VARCHAR(30) NOT NULL, sam_birthday DATE NOT NULL, sam_email VARCHAR(100) NOT NULL, sam_phoneNo VARCHAR(8) NOT NULL, role VARCHAR(10) NOT NULL, password VARCHAR(255) NOT NULL)";
     con.query(sql, function (err, result) {
       err ? console.log(err.sqlMessage) : console.log("SAM table created");
     });
@@ -106,7 +110,7 @@ const setupDatabase =  () => {
 
     // Academic Staff Table
     sql =
-      "CREATE TABLE AcademicStaff (as_ID VARCHAR(10) PRIMARY KEY, as_fname VARCHAR(50) NOT NULL, as_lname VARCHAR(30) NOT NULL, as_birthday DATE NOT NULL, as_email VARCHAR(100) NOT NULL, as_phoneNo VARCHAR(8) NOT NULL, password VARCHAR(255) NOT NULL)";
+      "CREATE TABLE AcademicStaff (as_ID VARCHAR(10) PRIMARY KEY, as_fname VARCHAR(50) NOT NULL, as_lname VARCHAR(30) NOT NULL, as_birthday DATE NOT NULL, as_email VARCHAR(100) NOT NULL, as_phoneNo VARCHAR(8) NOT NULL, role VARCHAR(10) NOT NULL, password VARCHAR(255) NOT NULL)";
     con.query(sql, function (err, result) {
       err
         ? console.log(err.sqlMessage)
