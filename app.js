@@ -8,6 +8,8 @@ const methodOverride = require("method-override");
 const home = require("./routes/home");
 const request = require("./routes/request");
 const staff = require("./routes/staff");
+const sam = require("./routes/sam");
+const academicStaff = require("./routes/academic-staff");
 const passport = require("passport");
 
 app.use(express.urlencoded({ extended: false }));
@@ -33,6 +35,8 @@ app.use(express.static("public"));
 app.use("/", home);
 app.use("/request", request);
 app.use("/staff", staff);
+app.use("/sam", sam);
+app.use("/academic-staff", academicStaff);
 
 function logger(req, res, next) {
   console.log("Request for " + req.originalUrl);
