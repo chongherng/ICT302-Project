@@ -28,7 +28,9 @@
                     <ul id="menu">
                         <li><p class="nav-name">John Doe</p><p class="nav-title">Senior Administration</p></li>
                         <img class="float-left" src="../img/Logout-White.png" width="29px">
-                        <a class="float-left logout-btn" href="#"><li>Logout</li></a>
+                        <form action="/staff/logout?_method=DELETE" method="POST">
+                            <button class="float-left logout-btn" href="logout">Logout</button>
+                        </form>
                         <div class="clear-float"></div>
                     </ul>
                 </div>
