@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600;700&display=swap" rel="stylesheet">
-    <title>New Requests</title>
+    <title>Assigned Requests</title>
 </head>
 <body class="dashboard-bg">
     <div id="dashboard-container">
@@ -38,7 +38,7 @@
     <div class="new-requests-container-inner">
         <div class="dashboard-titles">
             <img src="../img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
-            <p>New Requests</p>
+            <p>Assigned Requests</p>
         </div>
         <div class="new-requests-content">
             <div class="new-requests-top-content">
@@ -63,17 +63,7 @@
                     </a>
                 </div>
             </div>
-            <form name="new-request" action="#" id="new-requests-form" method="POST">
-                <div class="float-left">
-                    <select class="select-staff-dropdown">
-                    <option value="0">Academic Staff Assigned</option>
-                    <option value="1">John Doe</option>
-                    <option value="2">Mark Johnson</option>
-                    </select>
-                </div>
-                <div class="float-right">
-                    <input type="date" id="birthday" name="birthday">
-                </div>
+            <form name="assigned-request" action="#" id="assigned-requests-form" method="POST">
                 <br>
                 <textarea class="comment" placeholder="Comments"></textarea><br>
                 <br>

@@ -6,26 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../script/script.js"></script>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600;700&display=swap" rel="stylesheet">
     <title>Staff Portal</title>
 </head>
 <body>
-    
-            <div class="relative5">
-                <p class="p1"> Murdoch University</p>
-                <div class="relative6">
-                    <p class="p2">Staff Portal</p>
-                    <div class="relative7">
-                    <form method="POST" action="/staff/auth">
-                        <label class="StaffID" for="StaffID">Staff ID:</label><br>
-                        <input type="text" id="staffID" name="staffID" placeholder="Staff ID" ><br>
-                        <label class="password" for="password">Password:</label><br>
-                        <input type="password" id="password" name="password" placeholder="Password"><br><br>
-                        <input type="submit" value="Login">
-                      </form> 
-                     </div>
-                </div>
+    <div class="flex-container">
+        <div class="left-content">
+            <!--Background logo inserted through css-->
+        </div>
+        <div class="right-content">
+            <div>
+                <h1 class="landing-title">Murdoch University</h1>
+                <h2 class="landing-sub-title">Staff Portal</h2>
             </div>
-        
-    
+            <div class="staff-login-container">
+                <form method="POST" action="/staff/auth">
+                    <label class="StaffID" for="StaffID"></label><br>
+                    <input type="text" id="staffID" name="staffID" placeholder="Staff ID" ><br>
+                    <label class="password" for="password"></label><br>
+                    <input type="password" id="password" name="password" placeholder="Password"><br><br>
+                    <input type="submit" value="Login">
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
