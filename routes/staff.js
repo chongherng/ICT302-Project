@@ -8,23 +8,31 @@ initializePassport(passport);
 
 // Get Staff login page
 router.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/views/staff-login.html"));
+  res.render("staff-login.ejs");
 });
 
-router.post(
-  "/auth",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/staff/login",
-    failureFlash: true,
-  })
-);
+router.post("/auth", function (req, res, next) {
+  passport.authenticate("local", function (err, user, info) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.render("staff-login.ejs", { message: "Invalid Username or Password"});
+    }
+    req.logIn(user, function (err) {
+      if (err) {
+        return next(err);
+      } else if (user.role === "SAM") {
+        return res.redirect("/sam/" + user.sam_ID);
+      } 
+      return res.redirect("/academic-staff/" + user.as_ID);
+    });
+  })(req, res, next);
+});
 
-router.delete('/logout', (req, res) => {
+router.delete("/logout", (req, res) => {
   req.logOut();
-  res.redirect('/');
-})
-
-
+  res.redirect("/");
+});
 
 module.exports = router;
