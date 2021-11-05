@@ -47,7 +47,7 @@ var ASValues = [
     "JoeyLim@test.com",
     "87549925",
     "AS",
-    "$2b$10$fm7/5ltWFYjj9tvL.yl7g.WJB78nYdWM8ggvHwHAIBPw9iTv/0gQ.",
+    "$2a$10$lxOMzrrKTPwRbq1C4ndg3.EcxnOTMSm92txV.akpatl.r1ou/SQNG",
   ],
   [
     "3387622321",
@@ -57,7 +57,7 @@ var ASValues = [
     "JimDoe@test.com",
     "87456211",
     "AS",
-    "$2b$10$ZtAke8ktmKLU2wEPW7dp.ut6N83TzGye9Sntxs2PnOPwZ1a21Nxxe",
+    "$2a$10$o9btt05HzBpF8KWVb/5cUeWQFNCdVDLZK.34wSSOnMiNvWULzYqc2",
   ],
 ];
 
