@@ -35,6 +35,7 @@ var SAMValues = [
 ];
 
 // password for AS1: aspassword123
+// password for AS2: aspassword321
 var ASValues = [
   [
     "3374875962",
