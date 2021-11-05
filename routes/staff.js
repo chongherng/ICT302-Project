@@ -7,11 +7,11 @@ const initializePassport = require("../controllers/authController");
 initializePassport(passport);
 
 // Get Staff login page
-router.get("/login", (req, res) => {
+router.get("/login", checkNotAuthenticated, (req, res) => {
   res.render("staff-login.ejs");
 });
 
-router.post("/login", function (req, res, next) {
+router.post("/login", checkNotAuthenticated, function (req, res, next) {
   passport.authenticate("local", function (err, user, info) {
     if (err) {
       return next(err);
@@ -34,5 +34,17 @@ router.delete("/logout", (req, res) => {
   req.logOut();
   res.redirect("/");
 });
+
+
+// use this middleware to make sure authenticated users are not allowed to view certain page
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    if(req.user.role === "SAM"){
+      return res.redirect("/sam/" + req.user.sam_ID);
+    }
+    return res.redirect("/academic-staff/" + req.user.as_ID);
+  }
+  next();
+}
 
 module.exports = router;
