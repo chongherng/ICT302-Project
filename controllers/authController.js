@@ -29,20 +29,21 @@ const getUserByStaffID = async (username) => {
       database: "ICT302",
     });
 
-    const [rows, fields] = await con.query(
+    var [rows, fields] = await con.query(
       "SELECT * FROM SAM WHERE sam_ID = " + mysql.escape(username)
     );
     if (rows[0] == null) {
-      const [rows, fields] = await con.query(
+      [rows, fields] = await con.query(
         "SELECT * FROM AcademicStaff WHERE as_ID = " + mysql.escape(username)
       );
+      return rows[0];
     }
     return rows[0];
   } catch {}
 };
 
 const initialize = (passport) => {
-  passport.use(new LocalStrategy({ usernameField: "staffID" }, authUser));
+  passport.use('local',new LocalStrategy({ usernameField: "staffID" }, authUser));
   passport.serializeUser((user, done) => done(null, user));
   passport.deserializeUser((user, done) => done(null, user));
 };

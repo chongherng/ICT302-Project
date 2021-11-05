@@ -21,6 +21,11 @@
                 <h1 class="landing-title">Murdoch University</h1>
                 <h2 class="landing-sub-title">Staff Portal</h2>
             </div>
+            <% if(typeof(message) != "undefined") { %>
+            <% if(message) { %>
+            <div><%= message %></div>
+            <% }%>
+            <% }%>
             <div class="staff-login-container">
                 <form method="POST" action="/staff/auth">
                     <label class="StaffID" for="StaffID"></label><br>
