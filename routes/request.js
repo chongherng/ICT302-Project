@@ -34,6 +34,10 @@ router.get("/student", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/views/student-request-portal.html"));
 });
 
+router.get("/completed", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/views/request-completed.html"));
+})
+
 // Get SSS form data
 router.post("/student-support-staff/submit", upload.single('file'), async (req, res) => {
   var isValidated = await validateForm.validateSSSForm(req.body, req.file);
@@ -41,7 +45,7 @@ router.post("/student-support-staff/submit", upload.single('file'), async (req, 
     console.log("Validated...");
     console.log("Updating database...");
     console.log("Sending email...");
-    return res.sendStatus(200);
+    return res.redirect("/request/completed");
   }
   return res.sendStatus(400);
 });
@@ -53,7 +57,7 @@ router.post("/student/submit", upload.single('file'), async (req, res) => {
     console.log("Validated...");
     console.log("Updating database...");
     console.log("Sending email...");
-    return res.sendStatus(200);
+    return res.redirect("/request/completed");
   }
   res.sendStatus(400);
 });
