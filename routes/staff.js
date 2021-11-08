@@ -2,6 +2,9 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 const path = require("path");
+const multer = require("multer");
+
+const upload = multer({ dest: ''});
 
 const initializePassport = require("../controllers/authController");
 initializePassport(passport);
@@ -11,7 +14,8 @@ router.get("/login", checkNotAuthenticated, (req, res) => {
   res.render("staff-login.ejs");
 });
 
-router.post("/login", checkNotAuthenticated, function (req, res, next) {
+router.post("/login", upload.none(), checkNotAuthenticated, function (req, res, next) {
+  console.log(req);
   passport.authenticate("local", function (err, user, info) {
     if (err) {
       return next(err);

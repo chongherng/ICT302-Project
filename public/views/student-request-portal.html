@@ -22,21 +22,21 @@
         <h2 class="landing-sub-title">Student Request Portal</h2>
       </div>
       <div class="support-staff-container">
-        <form action="#" id="Student_Support_Staff_Request_Form">
+        <form action="/request/student/submit" id="Student_Support_Staff_Request_Form" method="POST" enctype="multipart/form-data">
             <label class="StudentID" for="StudentID"></label><br>
             <input type="text" id="StudentID" name="StudentID" placeholder="Student ID" ><br>
-            <select class="support-staff-dropdown">
+            <select class="support-staff-dropdown" name="requestType">
               <option value="0">Select Request Category</option>
-              <option value="1">Request a Study Plan</option>
-              <option value="2">Request for Unit Exemptions</option>
+              <option value="study plan">Request a Study Plan</option>
+              <option value="unit exemption">Request for Unit Exemptions</option>
             </select>
             <br>
-            <textarea class="comment" placeholder="Comments"></textarea><br>
+            <textarea class="comment" placeholder="Comments" name="comment"></textarea><br>
             <!-- our custom upload button -->
             <label class="documentlabel" for="actual-btn">Attach A Document</label>
 
-            <!-- actual upload which is hidden -->
-            <input type="file" id="actual-btn" hidden/>
+            <!-- actual upload which is hidden -->  
+            <input type="file" id="actual-btn" name="file" accept=".docx,.pdf,.doc" hidden/>
 
             <!-- name of file chosen -->
             <span id="file-chosen">No file chosen</span>

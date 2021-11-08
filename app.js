@@ -12,7 +12,6 @@ const sam = require("./routes/sam");
 const academicStaff = require("./routes/academic-staff");
 const passport = require("passport");
 
-app.use(express.urlencoded({ extended: false }));
 app.use(flash());
 app.use(
   session({
@@ -24,6 +23,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
+
+
 
 // View engine setup
 app.set("view engine", "ejs");
