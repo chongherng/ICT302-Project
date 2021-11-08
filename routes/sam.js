@@ -13,5 +13,4 @@ function checkAuthenticated(req, res, next) {
   res.status(401).send("401 - Unauthorized");
 }
 
-
 module.exports = router;
