@@ -14,7 +14,9 @@ const findStudent = async (studentID) => {
       "SELECT * FROM Student WHERE s_ID = " + mysql.escape(studentID)
     );
     return rows[0];
-  } catch {}
+  } catch (err){
+    console.log(err);
+  }
 };
 
 const findStudentSupportStaff = async (studentSupportStaffID) => {
@@ -28,14 +30,117 @@ const findStudentSupportStaff = async (studentSupportStaffID) => {
     });
 
     var [rows, fields] = await con.query(
-      "SELECT * FROM StudentSupportStaff WHERE sss_ID = " + mysql.escape(studentSupportStaffID)
+      "SELECT * FROM StudentSupportStaff WHERE sss_ID = " +
+        mysql.escape(studentSupportStaffID)
     );
     return rows[0];
-  } catch {}
+  } catch (err){
+    console.log(err);
+  }
 };
 
+const insertStudentRequest = async (
+  studentID,
+  requestType,
+  description,
+  documentPath,
+  dateOfRequest,
+  requestStatus,
+  otherType
+) => {
+  var requestNo = getRequestPrefix(requestType);
+  try {
+    var con = await mysql.createConnection({
+      // IMPORTANT: Please update the user and password accordingly
+      host: "localhost",
+      user: "root",
+      password: "password",
+      database: "ICT302",
+    });
+    // Generate unique request number
+    var [requestTypeDup, fields] = await con.query(
+      "SELECT COUNT(r_type) as requestCount FROM Request WHERE r_type = " +
+        mysql.escape(requestType)
+    );
+    requestNo =
+      requestNo + (parseInt(requestTypeDup[0].requestCount) + 1).toString();
+    // prepare values to insert
+    await con.query(
+      "INSERT INTO Request (s_ID, r_type, r_description, r_documentpath, r_otherType, r_dateofrequest, r_status, r_NO) VALUES (?,?,?,?,?,?,?,?)",
+      [
+        studentID,
+        requestType,
+        description,
+        documentPath,
+        otherType,
+        dateOfRequest,
+        requestStatus,
+        requestNo,
+      ]
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const insertStudentSupportStaffRequest = async (
+  sssID,
+  requestType,
+  description,
+  documentPath,
+  dateOfRequest,
+  requestStatus,
+  otherType
+) => {
+  var requestNo = getRequestPrefix(requestType);
+  try {
+    var con = await mysql.createConnection({
+      // IMPORTANT: Please update the user and password accordingly
+      host: "localhost",
+      user: "root",
+      password: "password",
+      database: "ICT302",
+    });
+    // Generate unique request number
+    var [requestTypeDup, fields] = await con.query(
+      "SELECT COUNT(r_type) as requestCount FROM Request WHERE r_type = " +
+        mysql.escape(requestType)
+    );
+    requestNo =
+      requestNo + (parseInt(requestTypeDup[0].requestCount) + 1).toString();
+    // prepare values to insert
+    await con.query(
+      "INSERT INTO Request (sss_ID, r_type, r_description, r_documentpath, r_otherType, r_dateofrequest, r_status, r_NO) VALUES (?,?,?,?,?,?,?,?)",
+      [
+        sssID,
+        requestType,
+        description,
+        documentPath,
+        otherType,
+        dateOfRequest,
+        requestStatus,
+        requestNo,
+      ]
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getRequestPrefix = (requestType) => {
+  switch (requestType) {
+    case "study plan":
+      return "SP";
+    case "unit exemption":
+      return "UE";
+    default:
+      break;
+  }
+};
 
 module.exports = {
   findStudent,
   findStudentSupportStaff,
+  insertStudentRequest,
+  insertStudentSupportStaffRequest,
 };

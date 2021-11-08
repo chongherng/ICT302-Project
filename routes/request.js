@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const multer = require("multer");
-const validateForm = require('../controllers/validationController');
+const validateFormController = require('../controllers/validationController');
+const workFlowController = require('../controllers/workflowController');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -40,11 +41,10 @@ router.get("/completed", (req, res) => {
 
 // Get SSS form data
 router.post("/student-support-staff/submit", upload.single('file'), async (req, res) => {
-  var isValidated = await validateForm.validateSSSForm(req.body, req.file);
+  var isValidated = await validateFormController.validateSSSForm(req.body, req.file);
   if (isValidated) {
-    console.log("Validated...");
-    console.log("Updating database...");
-    console.log("Sending email...");
+    workFlowController.newSSSRequestToDatabase(req.body, req.file);
+    workFlowController.newRequestEmailToSAM();
     return res.redirect("/request/completed");
   }
   return res.sendStatus(400);
@@ -52,11 +52,10 @@ router.post("/student-support-staff/submit", upload.single('file'), async (req, 
 
 // Get Student form data
 router.post("/student/submit", upload.single('file'), async (req, res) => {
-  var isValidated = await validateForm.validateStudentForm(req.body, req.file);
+  var isValidated = await validateFormController.validateStudentForm(req.body, req.file);
   if(isValidated){
-    console.log("Validated...");
-    console.log("Updating database...");
-    console.log("Sending email...");
+    workFlowController.newStudentRequestToDatabase(req.body, req.file);
+    workFlowController.newRequestEmailToSAM();
     return res.redirect("/request/completed");
   }
   res.sendStatus(400);
