@@ -164,6 +164,25 @@ const getAllRequestWithStudent = async () => {
   }
 }
 
+const getAllRequestWithStudentAndSAM = async () => {
+  try {
+    var con = await mysql.createConnection({
+      // IMPORTANT: Please update the user and password accordingly
+      host: "localhost",
+      user: "root",
+      password: "password",
+      database: "ICT302",
+    });
+
+    var [rows, fields] = await con.query(
+      "SELECT * FROM Request INNER JOIN Student ON Request.s_id=Student.s_id INNER JOIN Sam ON Request.sam_id=Sam.sam_id;"
+    );
+    return rows;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 const getRequestPrefix = (requestType) => {
   switch (requestType) {
     case "Study Plan":
@@ -183,4 +202,5 @@ module.exports = {
   insertStudentSupportStaffRequest,
   getAllSAM,
   getAllRequestWithStudent,
+  getAllRequestWithStudentAndSAM,
 };
