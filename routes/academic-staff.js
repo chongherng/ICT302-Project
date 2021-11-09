@@ -3,7 +3,8 @@ const router = express.Router();
 const path = require("path");
 
 router.get("/:id", checkAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/views/academic-staff-dashboard.html"));
+  var fullname = req.user.as_fname + " " + req.user.as_lname;
+  res.render("academic-staff-dashboard.ejs", { staffName: fullname, requestData: requestList});
 });
 
 function checkAuthenticated(req, res, next) {

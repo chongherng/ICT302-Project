@@ -50,8 +50,6 @@ const newRequestEmailToSAM = async (requestorID, requestorType, requestType, req
     <br>
     <p>Click on this link to view your request.</p>
     <a href="#">link</a>`;
-    
-    console.log(content)
     mailController.sendEmail("New Request " + requestNo, SAM.sam_email, content);
   })
   

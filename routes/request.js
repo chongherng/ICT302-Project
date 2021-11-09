@@ -43,9 +43,11 @@ router.get("/completed", (req, res) => {
 router.post("/student-support-staff/submit", upload.single('file'), async (req, res) => {
   var isValidated = await validateFormController.validateSSSForm(req.body, req.file);
   if (isValidated) {
-    await workFlowController.newSSSRequestToDatabase(req.body, req.file);
-    await workFlowController.newRequestEmailToSAM(req.body.StudentSupportStaffID,"SSS", req.body.requestType);
-    return res.redirect("/request/completed");
+    try {
+      await workFlowController.newSSSRequestToDatabase(req.body, req.file);
+      await workFlowController.newRequestEmailToSAM(req.body.StudentSupportStaffID,"SSS", req.body.requestType);
+      return res.redirect("/request/completed");
+    } catch {}
   }
   return res.sendStatus(400);
 });
@@ -54,9 +56,11 @@ router.post("/student-support-staff/submit", upload.single('file'), async (req, 
 router.post("/student/submit", upload.single('file'), async (req, res) => {
   var isValidated = await validateFormController.validateStudentForm(req.body, req.file);
   if(isValidated){
-    var requestNo = await workFlowController.newStudentRequestToDatabase(req.body, req.file);
-    await workFlowController.newRequestEmailToSAM(req.body.StudentID,"Student", req.body.requestType, requestNo);
-    return res.redirect("/request/completed");
+    try {
+      var requestNo = await workFlowController.newStudentRequestToDatabase(req.body, req.file);
+      await workFlowController.newRequestEmailToSAM(req.body.StudentID,"Student", req.body.requestType, requestNo);
+      return res.redirect("/request/completed");
+    } catch {}
   }
   res.sendStatus(400);
 });
