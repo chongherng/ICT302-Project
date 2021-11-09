@@ -22,11 +22,11 @@
         <h2 class="landing-sub-title">Student Support Staff Request Portal</h2>
       </div>
       <div class="support-staff-container">
-        <form action="/request/student-support-staff/submit" id="Student_Support_Staff_Request_Form" method="POST" enctype="multipart/form-data">
+        <form action="/request/student-support-staff/submit" id="Student_Support_Staff_Request_Form" method="POST" enctype="multipart/form-data" onsubmit="return valdidatecheck()">
             <label class="StudentID" for="StudentID"></label><br>
-            <input type="text" id="StudentID" name="StudentSupportStaffID" placeholder="Student Support Staff ID" ><br>
-            <select class="support-staff-dropdown" name="requestType">
-              <option value="0">Select Request Category</option>
+            <input type="text" id="StudentID" name="StudentSupportStaffID" placeholder="Student Support Staff ID" required minlength="8" maxlength="8 " ><br>
+            <select class="support-staff-dropdown" name="requestType" required>
+              <option value="" disabled selected>Select Request Category</option>
               <option value="Study Plan">Request a Study Plan</option>
               <option value="Unit Exemption">Request for Unit Exemptions</option>
             </select>
@@ -39,15 +39,43 @@
             <input type="file" id="actual-btn" name="file" accept=".docx,.pdf,.doc" hidden/>
 
             <!-- name of file chosen -->
-            <span id="file-chosen">No file chosen</span>
+            <span id="file-chosen"></span>
+            <p id = "errormsg" style =
+            "color:red; font-size: 20px; font-weight: bold;">
+        </p>
             <br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" onclick = "valdidatecheck()">
           </form>
         </div>
     </div>
   </div>    
 </body>
 <script>
+    var down = document.getElementById('errormsg');
+        var file = document.getElementById("actual-btn");
+              
+        function valdidatecheck() {
+            if(file.files.length == 0 ){
+                down.innerHTML = "No files selected";
+                return false;
+            } else {
+                       }
+                      
+
+            var fileInput = 
+                document.getElementById('actual-btn');
+              
+            var filePath = fileInput.value;
+          
+            // Allowing file type
+            var allowedExtensions = 
+/(\.doc|\.docx|\.pdf|\.txt)$/i;
+              
+            if (!allowedExtensions.exec(filePath)) {
+              down.innerHTML = "Invalid file extension selected";
+                return false;
+            } 
+        }
   var x, i, j, l, ll, selElmnt, a, b, c;
   /*look for any elements with the class "custom-select":*/
   x = document.getElementsByClassName("custom-select");
