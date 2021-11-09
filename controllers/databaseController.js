@@ -147,16 +147,53 @@ const insertStudentSupportStaffRequest = async (
   }
 };
 
+const getAllRequestWithStudent = async () => {
+  try {
+    var con = await mysql.createConnection({
+      // IMPORTANT: Please update the user and password accordingly
+      host: "localhost",
+      user: "root",
+      password: "password",
+      database: "ICT302",
+    });
+
+    var [rows, fields] = await con.query("SELECT * FROM Request INNER JOIN Student ON Request.s_ID=Student.s_ID");
+    return rows;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const getAllRequestWithStudentAndSAM = async () => {
+  try {
+    var con = await mysql.createConnection({
+      // IMPORTANT: Please update the user and password accordingly
+      host: "localhost",
+      user: "root",
+      password: "password",
+      database: "ICT302",
+    });
+
+    var [rows, fields] = await con.query(
+      "SELECT * FROM Request INNER JOIN Student ON Request.s_id=Student.s_id INNER JOIN Sam ON Request.sam_id=Sam.sam_id;"
+    );
+    return rows;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 const getRequestPrefix = (requestType) => {
   switch (requestType) {
-    case "study plan":
+    case "Study Plan":
       return "SP";
-    case "unit exemption":
+    case "Unit Exemption":
       return "UE";
     default:
       break;
   }
 };
+
 
 module.exports = {
   findStudent,
@@ -164,4 +201,6 @@ module.exports = {
   insertStudentRequest,
   insertStudentSupportStaffRequest,
   getAllSAM,
+  getAllRequestWithStudent,
+  getAllRequestWithStudentAndSAM,
 };
