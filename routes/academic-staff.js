@@ -10,7 +10,7 @@ function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated() && req.user.role === "AS") {
     return next();
   }
-  res.status(401).send("401 - Unauthorized");
+  res.redirect("staff/login");
 }
 
 module.exports = router;

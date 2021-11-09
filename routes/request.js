@@ -43,8 +43,8 @@ router.get("/completed", (req, res) => {
 router.post("/student-support-staff/submit", upload.single('file'), async (req, res) => {
   var isValidated = await validateFormController.validateSSSForm(req.body, req.file);
   if (isValidated) {
-    workFlowController.newSSSRequestToDatabase(req.body, req.file);
-    workFlowController.newRequestEmailToSAM();
+    await workFlowController.newSSSRequestToDatabase(req.body, req.file);
+    await workFlowController.newRequestEmailToSAM(req.body.StudentSupportStaffID,"SSS", req.body.requestType);
     return res.redirect("/request/completed");
   }
   return res.sendStatus(400);
@@ -54,8 +54,8 @@ router.post("/student-support-staff/submit", upload.single('file'), async (req, 
 router.post("/student/submit", upload.single('file'), async (req, res) => {
   var isValidated = await validateFormController.validateStudentForm(req.body, req.file);
   if(isValidated){
-    workFlowController.newStudentRequestToDatabase(req.body, req.file);
-    workFlowController.newRequestEmailToSAM();
+    var requestNo = await workFlowController.newStudentRequestToDatabase(req.body, req.file);
+    await workFlowController.newRequestEmailToSAM(req.body.StudentID,"Student", req.body.requestType, requestNo);
     return res.redirect("/request/completed");
   }
   res.sendStatus(400);

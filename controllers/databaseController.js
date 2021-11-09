@@ -39,6 +39,24 @@ const findStudentSupportStaff = async (studentSupportStaffID) => {
   }
 };
 
+const getAllSAM = async () => {
+  try {
+    var con = await mysql.createConnection({
+      // IMPORTANT: Please update the user and password accordingly
+      host: "localhost",
+      user: "root",
+      password: "password",
+      database: "ICT302",
+    });
+
+    var [rows, fields] = await con.query("SELECT * FROM SAM");
+    return rows;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
 const insertStudentRequest = async (
   studentID,
   requestType,
@@ -78,6 +96,7 @@ const insertStudentRequest = async (
         requestNo,
       ]
     );
+    return requestNo;
   } catch (err) {
     console.log(err);
   }
@@ -122,6 +141,7 @@ const insertStudentSupportStaffRequest = async (
         requestNo,
       ]
     );
+    return requestNo;
   } catch (err) {
     console.log(err);
   }
@@ -143,4 +163,5 @@ module.exports = {
   findStudentSupportStaff,
   insertStudentRequest,
   insertStudentSupportStaffRequest,
+  getAllSAM,
 };

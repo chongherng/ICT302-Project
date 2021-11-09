@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-async function sendEmail() {
+async function sendEmail(subject, receiver, content) {
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -15,16 +15,14 @@ async function sendEmail() {
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '"Request Notification" <FT01.WorkFlow@gmail.com>', // sender address
-    to: "chong_herng@hotmail.com", // list of receivers
-    subject: "Request Notification", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Email sent from FT01.WorkFlow</b>", // html body
+    to: receiver, // list of receivers
+    subject: subject, // Subject line
+    text: "", // plain text body
+    html: content, // html body
   });
-
-  console.log("Message sent: %s", info.messageId);
-
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 
 
-module.exports = sendEmail;
+module.exports = {
+  sendEmail,
+}
