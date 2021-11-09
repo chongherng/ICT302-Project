@@ -57,7 +57,7 @@
                             <tbody class="academic-tbody">
                                 <% requestData.forEach((request) => { %>
                                     <% if(request.r_status == "Assigned Request") { %>
-                                        <tr>
+                                      <tr data-href="http://localhost:3000/academic-staff/<%= request.as_ID %>/request/assigned/<%= request.r_NO %>">
                                             <td><%= request.r_NO %></td>
                                             <td><%= request.s_ID %></td>
                                             <td><%= request.s_fname + " " + request.s_lname %></td>
@@ -76,6 +76,23 @@
     </div>
 </body>
 <script>
+ document.addEventListener("DOMContentLoaded", () => {
+
+const rows = document.querySelectorAll("tr[data-href]");
+
+rows.forEach(row => {
+  row.addEventListener("click", () => {
+    window.location.href = row.dataset.href;
+  });
+});
+   });
+
+
+
+
+
+
+
   var x, i, j, l, ll, selElmnt, a, b, c;
   /*look for any elements with the class "custom-select":*/
   x = document.getElementsByClassName("custom-select");
@@ -169,5 +186,8 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
+
+
+
   </script>
 </html>

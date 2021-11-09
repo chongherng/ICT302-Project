@@ -393,7 +393,10 @@ table {
 tr {
   border-bottom: 1px solid #eaebee;
 }
-
+tr[data-href]
+{
+  cursor: pointer;
+}
 table tbody {
   display: block;
   max-height: 314px;
