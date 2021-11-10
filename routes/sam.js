@@ -13,12 +13,6 @@ router.get("/:id", checkAuthenticated, async (req, res) => {
   res.render("sam-dashboard.ejs", { staff: req.user , requestData : requestList });
 });
 
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated() && req.user.role === "SAM") {
-    return next();
-  }
-  res.redirect("../staff/login");
-}
 
 router.get("/:id/request/new/:requestNo", checkAuthenticated, async (req, res) => {
   var request = await databaseController.getRequest(req.params.requestNo);
@@ -58,5 +52,12 @@ router.post("/submit", checkAuthenticated, upload.none(), async (req, res) => {
     return res.sendStatus(400);
   }
 })
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated() && req.user.role === "SAM") {
+    return next();
+  }
+  res.redirect("../staff/login");
+}
 
 module.exports = router;
