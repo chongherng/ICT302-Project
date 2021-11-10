@@ -15,8 +15,12 @@ router.get("/:id", checkAuthenticated, async (req, res) => {
 
 
 router.get("/:id/request/assigned/:requestNo", checkAuthenticated, async (req, res) => {
-  var request = await databaseController.getRequest(req.params.requestNo);
-  res.render("assigned-requests.ejs", { staff: req.user, requestData: request})
+  if(await validationController.validateRequestFormLink(req.params.requestNo, "Assigned Request")) {
+    var request = await databaseController.getRequest(req.params.requestNo);
+    res.render("assigned-requests.ejs", { staff: req.user, requestData: request})
+  } else {
+    res.status(410).send("The request does not exists");
+  }
 })
 
 router.get("/download/upload/:filename", checkAuthenticated, async (req, res) => {
