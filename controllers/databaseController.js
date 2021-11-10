@@ -35,6 +35,20 @@ const findStudentSupportStaff = async (studentSupportStaffID) => {
   }
 };
 
+const findAcademicStaff = async (academicStaffID) => {
+  try {
+    var con = await mysql.createConnection(databaseInfo);
+
+    var [rows, fields] = await con.query(
+      "SELECT * FROM AcademicStaff WHERE as_ID = " +
+        mysql.escape(academicStaffID)
+    );
+    return rows[0];
+  } catch (err){
+    console.log(err);
+  }
+}
+
 const getAllSAM = async () => {
   try {
     var con = await mysql.createConnection(databaseInfo);
@@ -196,4 +210,5 @@ module.exports = {
   getAllRequestForAcademicStaff,
   getRequest,
   getAllAcademicStaff,
+  findAcademicStaff,
 };

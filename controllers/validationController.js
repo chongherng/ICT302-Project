@@ -30,7 +30,17 @@ const validateSSSForm = async (data, file) => {
   return true;
 };
 
+const validateNewRequestForm = async (data) => {
+  var academicStaff = await databaseController.findAcademicStaff(data.selectedAcademicStaff);
+  if(academicStaff == null || data.duedate == "" || (new Date(data.duedate) <= Date.now())) {
+    return false;
+  }
+  return true;
+  
+}
+
 module.exports = {
   validateStudentForm,
   validateSSSForm,
+  validateNewRequestForm,
 };
