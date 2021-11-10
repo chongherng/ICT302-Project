@@ -60,7 +60,7 @@ const newRequestEmailToSAM = async (requestorID, requestorType, requestType, req
 const rejectRequest = async (data) => {
   try {
     await databaseController.setRequestStatus(data.requestNo, "Rejected Request");
-    var subject = "The request " + data.requestNo + " has been rejected.";
+    var subject = "The request " + data.requestNo + " has been rejected";
     var student = await databaseController.findStudent(data.studentID);
     var content = `<p>Greetings ${data.studentName}, ${data.studentID} </p>
       <br>
@@ -99,7 +99,7 @@ const assignNewRequest = async (data, SAM) => {
 const requestMoreInfo = async (data) => {
   try {
     await databaseController.setRequestStatus(data.requestNo, "Rejected Request");
-    var subject = "More information required for  " + data.requestNo + ".";
+    var subject = "More information required for  " + data.requestNo + "";
     var student = await databaseController.findStudent(data.studentID);
     var content = `<p>Greetings ${data.studentName}, ${data.studentID} </p>
       <br>
@@ -115,6 +115,27 @@ const requestMoreInfo = async (data) => {
   }
 }
 
+const approveAssignedRequest = async (data, academicStaff) => {
+try {
+    await databaseController.setRequestStatus(data.requestNo, "Partial Request");
+    var request = await databaseController.getRequest(data.requestNo);
+    var SAM = await databaseController.findSAM(request.sam_ID)
+    var subject = "Pending actions for Partial Request " + data.requestNo + "";
+    var content = `<p>Greetings ${SAM.sam_fname + " " + SAM.sam_lname },</p>
+      <br>
+      <p>You have pending actions for a request. The request has been approved by ${academicStaff.as_fname + " " + academicStaff.as_lname }</p>
+      <br>
+      <p>Click on this link to view the request.</p>
+      <a href="#">link</a>
+      <br>
+      <p>Regards,<p>
+      <p>System Auto-Generated Message<p>`;
+    mailController.sendEmail(subject, SAM.sam_email, content);
+  } catch(err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   newStudentRequestToDatabase,
   newSSSRequestToDatabase,
@@ -122,4 +143,5 @@ module.exports = {
   assignNewRequest,
   rejectRequest,
   requestMoreInfo,
+  approveAssignedRequest,
 };

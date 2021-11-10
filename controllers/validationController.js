@@ -55,8 +55,17 @@ const validateNewRequestForm = async (data) => {
   
 }
 
+const validateAssignedRequestForm = async (data) => {
+  // validate request number
+  if(await databaseController.getRequest(data.requestNo) == null){
+    return false;
+  }
+  return true;
+}
+
 module.exports = {
   validateStudentForm,
   validateSSSForm,
   validateNewRequestForm,
+  validateAssignedRequestForm,
 };

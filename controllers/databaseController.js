@@ -50,6 +50,20 @@ const findAcademicStaff = async (academicStaffID) => {
   }
 }
 
+const findSAM = async (samID) => {
+  try {
+    var con = await mysql.createConnection(databaseInfo);
+
+    var [rows, fields] = await con.query(
+      "SELECT * FROM SAM WHERE sam_ID = " +
+        mysql.escape(samID)
+    );
+    return rows[0];
+  } catch (err){
+    console.log(err);
+  }
+}
+
 // query
 const getAllRequestWithStudent = async () => {
   try {
@@ -237,14 +251,15 @@ const getRequestPrefix = (requestType) => {
 module.exports = {
   findStudent,
   findStudentSupportStaff,
-  insertStudentRequest,
-  insertStudentSupportStaffRequest,
+  findSAM,
+  findAcademicStaff,
   getAllSAM,
   getAllRequestWithStudent,
   getAllRequestForAcademicStaff,
   getRequest,
   getAllAcademicStaff,
-  findAcademicStaff,
+  insertStudentSupportStaffRequest,
+  insertStudentRequest,
   setRequestStatus,
   setAcademicStaffOnRequest,
   setSamIDOnRequest,
