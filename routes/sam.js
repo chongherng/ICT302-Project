@@ -52,8 +52,10 @@ router.post("/submit", checkAuthenticated, upload.none(), async (req, res) => {
       workflowController.rejectRequest(req.body.requestNo, req.body.requestType, req.body.studentName, req.body.studentID);
     }
     if(req.body.action == "Request More Info"){
-      workflowController.requestMoreInfo(req.body.requestNo, req.body.comment);
+      workflowController.requestMoreInfo(req.body.requestNo, req.body.requestType, req.body.comment, req.body.studentName, req.body.studentID);
     }
+  } else {
+    return res.sendStatus(400);
   }
 })
 

@@ -61,7 +61,6 @@ const rejectRequest = async (requestNo, requestType, studentName, studentID) => 
   await databaseController.setRequestStatus(requestNo, "Rejected Request");
   var subject = "The request " + requestNo + " has been rejected.";
   var student = await databaseController.findStudent(studentID);
-  console.log(student);
   var content = `<p>Greetings ${studentName}, ${studentID} </p>
     <br>
     <p>The request that you have submitted ${requestNo}, ${requestType} has been rejected.</p>
@@ -75,8 +74,19 @@ const assignNewRequest = (requestNo, selectedAcademicStaff, duedate, comment) =>
 
 }
 
-const requestMoreInfo = (requestNo, comment) => {
-
+const requestMoreInfo = async (requestNo, requestType, comment, studentName, studentID) => {
+  await databaseController.setRequestStatus(requestNo, "Rejected Request");
+  var subject = "More information required for  " + requestNo + ".";
+  var student = await databaseController.findStudent(studentID);
+  var content = `<p>Greetings ${studentName}, ${studentID} </p>
+    <br>
+    <p>The request that you have submitted ${requestNo}, ${requestType} contains insufficient information.</p>
+    <p>Please resubmit the request form with the following additional information: </p>
+    <p>${comment}</p>
+    <br>
+    <p>Regards,<p>
+    <p>System Auto-Generated Message<p>`;
+  mailController.sendEmail(subject, student.s_email, content);
 }
 
 module.exports = {

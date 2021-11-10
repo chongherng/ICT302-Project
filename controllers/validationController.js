@@ -46,7 +46,7 @@ const validateNewRequestForm = async (data) => {
   if(data.action == "Reject") {
     return true;
   }
-  if(data.action == "More Info Required"){
+  if(data.action == "Request More Info"){
     if(data.comment == "" || data.comment == null){
       return false;
     }
