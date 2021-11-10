@@ -15,21 +15,37 @@ router.get("/:id", checkAuthenticated, async (req, res) => {
 
 
 router.get("/:id/request/new/:requestNo", checkAuthenticated, async (req, res) => {
-  var request = await databaseController.getRequest(req.params.requestNo);
-  var academicStaffList = await databaseController.getAllAcademicStaff();
-  res.render("new-requests.ejs", { staff: req.user, requestData: request, academicStaffList: academicStaffList });
+  if(await validationController.validateRequestFormLink(req.params.requestNo, "New Request")){
+    var request = await databaseController.getRequest(req.params.requestNo);
+    var academicStaffList = await databaseController.getAllAcademicStaff();
+    res.render("new-requests.ejs", { staff: req.user, requestData: request, academicStaffList: academicStaffList });
+  }else {
+    res.status(410).send("The request does not exists");
+  }
 })
 
 router.get("/:id/request/approved/:requestNo", checkAuthenticated, async (req, res) => {
-  res.render("approved-requests.ejs");
+  if(await validationController.validateRequestFormLink(req.params.requestNo, "Approved Request")){
+    res.render("approved-requests.ejs");
+  } else {
+    res.status(410).send("The request does not exists");
+  }
 })
 
 router.get("/:id/request/rejected/:requestNo", checkAuthenticated, async (req, res) => {
-  res.render("rejected-requests.ejs");
+  if(await validationController.validateRequestFormLink(req.params.requestNo, "Rejected Request")) {
+    res.render("rejected-requests.ejs");
+  }else {
+    res.status(410).send("The request does not exists");
+  }
 })
 
 router.get("/:id/request/partial/:requestNo", checkAuthenticated, async (req, res) => {
-  res.sendStatus(200);
+  if(await validationController.validateRequestFormLink(req.params.requestNo, "Partial Request")){
+    res.sendStatus(200);
+  } else {
+    res.status(410).send("The request does not exists");
+  }
   //res.render("partial-requests.ejs");
 })
 

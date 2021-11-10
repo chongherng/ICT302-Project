@@ -30,6 +30,11 @@ const validateSSSForm = async (data, file) => {
   return true;
 };
 
+const validateRequestFormLink = async (requestNo, requestStatus) => {
+  var request = await databaseController.getRequest(requestNo);
+  return request.r_status == requestStatus ? true : false;
+}
+
 const validateNewRequestForm = async (data) => {
   // validate request number
   if(await databaseController.getRequest(data.requestNo) == null){
@@ -68,4 +73,5 @@ module.exports = {
   validateSSSForm,
   validateNewRequestForm,
   validateAssignedRequestForm,
+  validateRequestFormLink,
 };
