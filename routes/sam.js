@@ -3,6 +3,10 @@ const router = express.Router();
 const path = require("path");
 const databaseController = require('../controllers/databaseController');
 const workflowController = require('../controllers/workflowController');
+const validationController = require('../controllers/validationController');
+const multer = require("multer");
+
+const upload = multer({ dest: "" });
 
 router.get("/:id", checkAuthenticated, async (req, res) => {
   var requestList = await databaseController.getAllRequestWithStudent();
@@ -36,6 +40,23 @@ router.get("/:id/request/partial/:requestNo", checkAuthenticated, async (req, re
 
 router.get("/download/upload/:filename", checkAuthenticated, async (req, res) => {
   res.download(path.join(__dirname , "../uploads/" + req.params.filename));
+})
+
+router.post("/submit", checkAuthenticated, upload.none(), async (req, res) => {
+  var isValidated = await validationController.validateNewRequestForm(req.body);
+  if(isValidated) {
+    if(req.body.action == "Assign"){
+      workflowController.assignNewRequest(req.body, req.user);
+    } 
+    if(req.body.action == "Reject"){
+      workflowController.rejectRequest(req.body);
+    }
+    if(req.body.action == "Request More Info"){
+      workflowController.requestMoreInfo(req.body);
+    }
+  } else {
+    return res.sendStatus(400);
+  }
 })
 
 module.exports = router;

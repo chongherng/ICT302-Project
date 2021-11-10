@@ -30,7 +30,33 @@ const validateSSSForm = async (data, file) => {
   return true;
 };
 
+const validateNewRequestForm = async (data) => {
+  // validate request number
+  if(await databaseController.getRequest(data.requestNo) == null){
+    return false;
+  }
+  // validate request form data
+  if(data.action == "Assign") {
+    var academicStaff = await databaseController.findAcademicStaff(data.selectedAcademicStaff);
+    if(academicStaff == null || data.duedate == "" || (new Date(data.duedate) <= Date.now())) {
+      return false;
+    }
+    return true;
+  }
+  if(data.action == "Reject") {
+    return true;
+  }
+  if(data.action == "Request More Info"){
+    if(data.comment == "" || data.comment == null){
+      return false;
+    }
+    return true;
+  }
+  
+}
+
 module.exports = {
   validateStudentForm,
   validateSSSForm,
+  validateNewRequestForm,
 };

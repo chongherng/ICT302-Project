@@ -65,9 +65,13 @@
                     </a>
                 </div>
             </div>
-            <form name="new-request" action="#" id="new-requests-form" method="POST">
+            <form name="new-request" action="/sam/submit" id="new-requests-form" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="requestNo" value="<%= requestData.r_NO%>">
+                <input type="hidden" name="requestType" value="<%= requestData.r_type%>">
+                <input type="hidden" name="studentName" value="<%= requestData.s_fname + " " + requestData.s_lname %>">
+                <input type="hidden" name="studentID" value="<%= requestData.s_ID%>">
                 <div class="float-left">
-                    <select class="select-staff-dropdown">
+                    <select class="select-staff-dropdown" name="selectedAcademicStaff">
                     <option value="" disabled selected>Academic Staff Assigned</option>
                     <% academicStaffList.forEach((academicStaff) => { %>
                         <option value="<%= academicStaff.as_ID %>"><%= academicStaff.as_fname + " " + academicStaff.as_lname + ", " + academicStaff.as_ID %></option>
@@ -75,10 +79,10 @@
                     </select>
                 </div>
                 <div class="float-right">
-                    <input type="date" id="birthday" name="birthday">
+                    <input type="date" id="birthday" name="duedate">
                 </div>
                 <br>
-                <textarea class="comment" placeholder="Comments"></textarea><br>
+                <textarea class="comment" placeholder="Comments" name="comment" ></textarea><br>
                 <br>
                 <input class="assign-btn" type="submit" name="action" value="Assign">
                 <input class="reject-btn" type="submit" name="action" value="Reject">
