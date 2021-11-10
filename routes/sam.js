@@ -46,13 +46,13 @@ router.post("/submit", checkAuthenticated, upload.none(), async (req, res) => {
   var isValidated = await validationController.validateNewRequestForm(req.body);
   if(isValidated) {
     if(req.body.action == "Assign"){
-      workflowController.assignNewRequest(req.body.requestNo, req.body.selectedAcademicStaff, req.body.duedate, req.body.comment);
+      workflowController.assignNewRequest(req.body, req.user);
     } 
     if(req.body.action == "Reject"){
-      workflowController.rejectRequest(req.body.requestNo, req.body.requestType, req.body.studentName, req.body.studentID);
+      workflowController.rejectRequest(req.body);
     }
     if(req.body.action == "Request More Info"){
-      workflowController.requestMoreInfo(req.body.requestNo, req.body.requestType, req.body.comment, req.body.studentName, req.body.studentID);
+      workflowController.requestMoreInfo(req.body);
     }
   } else {
     return res.sendStatus(400);
