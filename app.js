@@ -28,7 +28,7 @@ app.use(methodOverride("_method"));
 
 // View engine setup
 app.set("view engine", "ejs");
-app.use(logger); // Comment out this logger if needed
+//app.use(logger); // Comment out this logger if needed
 
 app.set("views", path.join(__dirname, "/public/views"));
 app.use(express.static(__dirname + "/public"));

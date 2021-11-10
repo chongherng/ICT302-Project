@@ -26,9 +26,12 @@ router.post("/login", upload.none(), checkNotAuthenticated, function (req, res, 
       if (err) {
         return next(err);
       } else if (user.role === "SAM") {
-        return res.redirect("/sam/" + user.sam_ID);
-      } 
-      return res.redirect("/academic-staff/" + user.as_ID);
+        res.redirect(req.session.returnTo || "/sam/" + user.sam_ID);
+        delete req.session.returnTo;
+      } else {
+        res.redirect(req.session.returnTo || "/academic-staff/" + user.as_ID);
+        delete req.session.returnTo;
+      }
     });
   })(req, res, next);
 });

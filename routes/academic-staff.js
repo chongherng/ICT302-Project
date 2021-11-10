@@ -26,7 +26,6 @@ router.get("/download/upload/:filename", checkAuthenticated, async (req, res) =>
 router.post("/submit", checkAuthenticated, upload.none(), async (req, res) => {
   var isValidated = await validationController.validateAssignedRequestForm(req.body);
   if (isValidated) {
-    console.log(req.body.action);
     if (req.body.action == "Approve") {
       await workflowController.approveAssignedRequest(req.body, req.user);
     }
@@ -45,8 +44,10 @@ router.post("/submit", checkAuthenticated, upload.none(), async (req, res) => {
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated() && req.user.role === "AS") {
     return next();
+  } else {
+    req.session.returnTo = req.originalUrl;
+    res.redirect("/staff/login");
   }
-  res.redirect("../staff/login");
 }
 
 module.exports = router;

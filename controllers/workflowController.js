@@ -49,7 +49,7 @@ const newRequestEmailToSAM = async (requestorID, requestorType, requestType, req
     <p>You have a new request that needs your attention that is submitted by ${requestorID}, ${requestorName} regarding ${requestType}.</p>
     <br>
     <p>Click on this link to view your request.</p>
-    <a href="#">link</a>
+    <a href="http://localhost:3000/sam/${SAM.sam_ID}/request/new/${requestNo}">link</a>
     <br>
     <p>Regards,<p>
     <p>System Auto-Generated Message<p>`;
@@ -86,7 +86,7 @@ const assignNewRequest = async (data, SAM) => {
       <p>A request has been assigned to you regarding ${data.requestType}. Please note that this request is due by ${data.duedate}</p>
       <br>
       <p>Click on this link to view the request.</p>
-      <a href="#">link</a>
+      <a href="http://localhost:3000/academic-staff/${academicStaff.as_ID}/request/assigned/${data.requestNo}">link</a>
       <br>
       <p>Regards,<p>
       <p>System Auto-Generated Message<p>`;
@@ -126,7 +126,7 @@ try {
       <p>You have pending actions for a request. The request has been approved by ${academicStaff.as_fname + " " + academicStaff.as_lname }</p>
       <br>
       <p>Click on this link to view the request.</p>
-      <a href="#">link</a>
+      <a href="http://localhost:3000/sam/${SAM.sam_ID}/request/partial/${data.requestNo}">link</a>
       <br>
       <p>Regards,<p>
       <p>System Auto-Generated Message<p>`;

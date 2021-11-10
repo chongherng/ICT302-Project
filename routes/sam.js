@@ -29,6 +29,7 @@ router.get("/:id/request/rejected/:requestNo", checkAuthenticated, async (req, r
 })
 
 router.get("/:id/request/partial/:requestNo", checkAuthenticated, async (req, res) => {
+  res.sendStatus(200);
   //res.render("partial-requests.ejs");
 })
 
@@ -57,8 +58,10 @@ router.post("/submit", checkAuthenticated, upload.none(), async (req, res) => {
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated() && req.user.role === "SAM") {
     return next();
+  } else {
+    req.session.returnTo = req.originalUrl;
+    res.redirect("/staff/login");
   }
-  res.redirect("../staff/login");
 }
 
 module.exports = router;
