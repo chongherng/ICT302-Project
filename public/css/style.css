@@ -678,3 +678,43 @@ input[type="date"] {
   background-color: #3e3e3e;
   margin-left: 20px;
 }
+
+/* Partial Requests */
+
+#partial-requests-form input[type=submit]{
+  width:463px;
+  height:58px;
+  line-height:45px;
+  text-align: center;
+  background-color:#e31f3e;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size:25px;
+  color:#ffffff;
+  border-radius: 10px;
+  margin:0 0 24px 0px;
+}
+
+#partial-requests-form input[type=submit].partial-assign-btn{
+  background-color:#56a44b;
+}
+
+.staff-comments {
+  width:950px;
+  height:150px;
+  margin-top:20px;
+  border-radius:10px;
+  background-color:#ffffff;
+  box-shadow: 0 0px 10px rgb(0 0 0 / 0.2);
+  padding:20px 0px 0px 20px;
+}
+
+.staff-comments > p {
+  display:block;
+}
+
+.staff-comments > p:nth-child(2) {
+  font-size:20px;
+  color:#8a8a8a;
+  margin-bottom:40px;
+  font-weight:600;
+}
