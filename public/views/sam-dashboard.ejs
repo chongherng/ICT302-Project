@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../script/script.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
+    <script src="/script/script.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600;700&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
         <nav role="navigation" class="flex-container">
             <div class="nav-left">
                 <a href="/">
-                    <img src="../img/Murdoch_logo-Pink.jpg" width="150px" style="display:inline-block">
+                    <img src="/img/Murdoch_logo-Pink.jpg" width="150px" style="display:inline-block">
                 </a>
             </div>
             <div class="nav-right">
@@ -26,8 +26,8 @@
                     <span></span>
                     <span></span>
                     <ul id="menu">
-                        <li><p class="nav-name"><%= staffName %></p><p class="nav-title">Senior Administration</p></li>
-                        <img class="float-left" src="../img/Logout-White.png" width="29px">
+                        <li><p class="nav-name"><%= staff.sam_fname + " " + staff.sam_lname %></p><p class="nav-title">Senior Administration</p></li>
+                        <img class="float-left" src="/img/Logout-White.png" width="29px">
                         <form action="/staff/logout?_method=DELETE" method="POST">
                             <button class="float-left logout-btn" href="logout">Logout</button>
                         </form>
@@ -40,7 +40,7 @@
             <div class="sam-dashboard-top-content">
                 <div class="new-requests-container float-left">
                     <div class="dashboard-titles">
-                        <img src="../img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
+                        <img src="/img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
                         <p>New Requests</p>
                     </div>
                     <div class="clear-float"></div>
@@ -55,7 +55,7 @@
                             <tbody>
                                 <% requestData.forEach((request) => { %>
                                     <% if(request.r_status == "New Request") { %>
-                                        <tr>
+                                        <tr data-href="/sam/<%= staff.sam_ID %>/request/new/<%= request.r_NO %>" class="clickable">
                                             <td><%= request.r_NO %></td>
                                             <td><%= request.s_ID %></td>
                                             <td><%= request.s_fname + " " + request.s_lname %></td>
@@ -70,7 +70,7 @@
                 
                 <div class="approved-requests-container float-left">
                     <div class="dashboard-titles">
-                        <img src="../img/Tick-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
+                        <img src="/img/Tick-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
                         <p>Approved Requests</p>
                     </div>
                     <div class= outer-table>
@@ -84,7 +84,7 @@
                             <tbody>
                                 <% requestData.forEach((request) => { %>
                                     <% if(request.r_status == "Approved Request") { %>
-                                        <tr>
+                                        <tr data-href="/sam/<%= staff.sam_ID %>/request/approved/<%= request.r_NO %>" class="clickable">
                                             <td><%= request.r_NO %></td>
                                             <td><%= request.s_ID %></td>
                                             <td><%= request.s_fname + " " + request.s_lname %></td>
@@ -102,7 +102,7 @@
                 
                 <div class="partial-requests-container float-left">
                     <div class="dashboard-titles">
-                        <img src="../img/Chart-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
+                        <img src="/img/Chart-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
                         <p>Partial Requests</p>
                     </div>
                     <div class= outer-table>
@@ -116,7 +116,7 @@
                             <tbody>
                                 <% requestData.forEach((request) => { %>
                                     <% if(request.r_status == "Partial Request") { %>
-                                        <tr>
+                                        <tr data-href="/sam/<%= staff.sam_ID %>/request/partial/<%= request.r_NO %>" class="clickable">
                                             <td><%= request.r_NO %></td>
                                             <td><%= request.s_ID %></td>
                                             <td><%= request.s_fname + " " + request.s_lname %></td>
@@ -131,7 +131,7 @@
                 
                 <div class="rejected-requests-container float-left">
                     <div class="dashboard-titles">
-                        <img src="../img/Cross-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
+                        <img src="/img/Cross-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
                         <p>Rejected Requests</p>
                     </div>
                     <div class= outer-table>
@@ -145,7 +145,7 @@
                             <tbody>
                                 <% requestData.forEach((request) => { %>
                                     <% if(request.r_status == "Rejected Request") { %>
-                                        <tr>
+                                        <tr data-href="/sam/<%= staff.sam_ID %>/request/rejected/<%= request.r_NO %>" class="clickable"> 
                                             <td><%= request.r_NO %></td>
                                             <td><%= request.s_ID %></td>
                                             <td><%= request.s_fname + " " + request.s_lname %></td>
@@ -163,6 +163,14 @@
     </div>
 </body>
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const rows = document.querySelectorAll("tr[data-href]");
+    rows.forEach(row => {
+        row.addEventListener("click", () => {
+            window.location.href = row.dataset.href;
+        });
+    });
+});
   var x, i, j, l, ll, selElmnt, a, b, c;
   /*look for any elements with the class "custom-select":*/
   x = document.getElementsByClassName("custom-select");
@@ -256,5 +264,7 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
+
+
   </script>
 </html>

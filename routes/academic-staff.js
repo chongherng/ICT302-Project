@@ -4,16 +4,19 @@ const path = require("path");
 const databaseController = require('../controllers/databaseController')
 
 router.get("/:id", checkAuthenticated, async (req, res) => {
-  var fullname = req.user.as_fname + " " + req.user.as_lname;
-  var requestList = await databaseController.getAllRequestWithStudentAndSAM();
-  res.render("academic-staff-dashboard.ejs", { staffName: fullname, requestData: requestList});
+  var requestList = await databaseController.getAllRequestForAcademicStaff(req.user.as_ID);
+  res.render("academic-staff-dashboard.ejs", { staff: req.user, requestData: requestList});
 });
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated() && req.user.role === "AS") {
     return next();
   }
-  res.redirect("staff/login");
+  res.redirect("../staff/login");
 }
+
+router.get("/:id/request/assigned/:requestNo", checkAuthenticated, async (req, res) => {
+  res.render("assigned-requests.ejs")
+})
 
 module.exports = router;

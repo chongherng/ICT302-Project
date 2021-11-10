@@ -166,7 +166,7 @@ var SAMValues = [
 // password for AS4: aspassword444 LenaBloom
 // password for AS5: aspassword555 MerlinWard
 // password for AS6: aspassword666 NoellePrestige
-// password for AS6: aspassword777 OliverBlue
+// password for AS7: aspassword777 OliverBlue
 var ASValues = [
   [
     "3374875962",

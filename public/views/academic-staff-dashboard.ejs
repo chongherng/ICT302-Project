@@ -26,7 +26,7 @@
                     <span></span>
                     <span></span>
                     <ul id="menu">
-                        <li><p class="nav-name"><%= staffName %></p><p class="nav-title">Senior Administration</p></li>
+                        <li><p class="nav-name"><%= staff.as_fname + " " + staff.as_lname%></p><p class="nav-title">Senior Administration</p></li>
                         <img class="float-left" src="../img/Logout-White.png" width="29px">
                         <form action="/staff/logout?_method=DELETE" method="POST">
                             <button class="float-left logout-btn" href="logout">Logout</button>
@@ -57,7 +57,7 @@
                             <tbody class="academic-tbody">
                                 <% requestData.forEach((request) => { %>
                                     <% if(request.r_status == "Assigned Request") { %>
-                                      <tr data-href="http://localhost:3000/academic-staff/<%= request.as_ID %>/request/assigned/<%= request.r_NO %>">
+                                      <tr data-href="/academic-staff/<%= staff.as_ID %>/request/assigned/<%= request.r_NO %>" class="clickable">
                                             <td><%= request.r_NO %></td>
                                             <td><%= request.s_ID %></td>
                                             <td><%= request.s_fname + " " + request.s_lname %></td>
@@ -76,22 +76,15 @@
     </div>
 </body>
 <script>
- document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const rows = document.querySelectorAll("tr[data-href]");
 
-const rows = document.querySelectorAll("tr[data-href]");
-
-rows.forEach(row => {
-  row.addEventListener("click", () => {
-    window.location.href = row.dataset.href;
+  rows.forEach(row => {
+    row.addEventListener("click", () => {
+      window.location.href = row.dataset.href;
+    });
   });
 });
-   });
-
-
-
-
-
-
 
   var x, i, j, l, ll, selElmnt, a, b, c;
   /*look for any elements with the class "custom-select":*/

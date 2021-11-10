@@ -1,14 +1,16 @@
 const mysql = require("mysql2/promise");
 
+// Update user and password accordingly
+const databaseInfo = {
+  host: "localhost",
+  user: "root",
+  password: "password",
+  database: "ICT302",
+};
+
 const findStudent = async (studentID) => {
   try {
-    var con = await mysql.createConnection({
-      // IMPORTANT: Please update the user and password accordingly
-      host: "localhost",
-      user: "root",
-      password: "password",
-      database: "ICT302",
-    });
+    var con = await mysql.createConnection(databaseInfo);
 
     var [rows, fields] = await con.query(
       "SELECT * FROM Student WHERE s_ID = " + mysql.escape(studentID)
@@ -21,13 +23,7 @@ const findStudent = async (studentID) => {
 
 const findStudentSupportStaff = async (studentSupportStaffID) => {
   try {
-    var con = await mysql.createConnection({
-      // IMPORTANT: Please update the user and password accordingly
-      host: "localhost",
-      user: "root",
-      password: "password",
-      database: "ICT302",
-    });
+    var con = await mysql.createConnection(databaseInfo);
 
     var [rows, fields] = await con.query(
       "SELECT * FROM StudentSupportStaff WHERE sss_ID = " +
@@ -41,13 +37,7 @@ const findStudentSupportStaff = async (studentSupportStaffID) => {
 
 const getAllSAM = async () => {
   try {
-    var con = await mysql.createConnection({
-      // IMPORTANT: Please update the user and password accordingly
-      host: "localhost",
-      user: "root",
-      password: "password",
-      database: "ICT302",
-    });
+    var con = await mysql.createConnection(databaseInfo);
 
     var [rows, fields] = await con.query("SELECT * FROM SAM");
     return rows;
@@ -68,13 +58,7 @@ const insertStudentRequest = async (
 ) => {
   var requestNo = getRequestPrefix(requestType);
   try {
-    var con = await mysql.createConnection({
-      // IMPORTANT: Please update the user and password accordingly
-      host: "localhost",
-      user: "root",
-      password: "password",
-      database: "ICT302",
-    });
+    var con = await mysql.createConnection(databaseInfo);
     // Generate unique request number
     var [requestTypeDup, fields] = await con.query(
       "SELECT COUNT(r_type) as requestCount FROM Request WHERE r_type = " +
@@ -113,13 +97,7 @@ const insertStudentSupportStaffRequest = async (
 ) => {
   var requestNo = getRequestPrefix(requestType);
   try {
-    var con = await mysql.createConnection({
-      // IMPORTANT: Please update the user and password accordingly
-      host: "localhost",
-      user: "root",
-      password: "password",
-      database: "ICT302",
-    });
+    var con = await mysql.createConnection(databaseInfo);
     // Generate unique request number
     var [requestTypeDup, fields] = await con.query(
       "SELECT COUNT(r_type) as requestCount FROM Request WHERE r_type = " +
@@ -149,13 +127,7 @@ const insertStudentSupportStaffRequest = async (
 
 const getAllRequestWithStudent = async () => {
   try {
-    var con = await mysql.createConnection({
-      // IMPORTANT: Please update the user and password accordingly
-      host: "localhost",
-      user: "root",
-      password: "password",
-      database: "ICT302",
-    });
+    var con = await mysql.createConnection(databaseInfo);
 
     var [rows, fields] = await con.query("SELECT * FROM Request INNER JOIN Student ON Request.s_ID=Student.s_ID");
     return rows;
@@ -164,19 +136,38 @@ const getAllRequestWithStudent = async () => {
   }
 }
 
-const getAllRequestWithStudentAndSAM = async () => {
+const getAllRequestForAcademicStaff = async (academicStaffID) => {
   try {
-    var con = await mysql.createConnection({
-      // IMPORTANT: Please update the user and password accordingly
-      host: "localhost",
-      user: "root",
-      password: "password",
-      database: "ICT302",
-    });
+    var con = await mysql.createConnection(databaseInfo);
 
     var [rows, fields] = await con.query(
-      "SELECT * FROM Request INNER JOIN Student ON Request.s_id=Student.s_id INNER JOIN Sam ON Request.sam_id=Sam.sam_id;"
+      "SELECT * FROM Request INNER JOIN Student ON Request.s_id=Student.s_id INNER JOIN Sam ON Request.sam_id=Sam.sam_id WHERE as_ID = '" + academicStaffID + "' AND r_status = 'Assigned Request'" 
     );
+    return rows;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+const getRequest = async (requestNo) => {
+  try {
+    var con = await mysql.createConnection(databaseInfo);
+
+    var [rows, fields] = await con.query(
+      "SELECT * FROM Request INNER JOIN Student ON Request.s_id=Student.s_id WHERE r_NO = '" + requestNo + "';");
+    return rows[0];
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const getAllAcademicStaff = async () => {
+  try {
+    var con = await mysql.createConnection(databaseInfo);
+
+    var [rows, fields] = await con.query(
+      "SELECT * FROM AcademicStaff");
     return rows;
   } catch (err) {
     console.log(err);
@@ -202,5 +193,7 @@ module.exports = {
   insertStudentSupportStaffRequest,
   getAllSAM,
   getAllRequestWithStudent,
-  getAllRequestWithStudentAndSAM,
+  getAllRequestForAcademicStaff,
+  getRequest,
+  getAllAcademicStaff,
 };
