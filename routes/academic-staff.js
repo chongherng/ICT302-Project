@@ -16,7 +16,12 @@ function checkAuthenticated(req, res, next) {
 }
 
 router.get("/:id/request/assigned/:requestNo", checkAuthenticated, async (req, res) => {
-  res.render("assigned-requests.ejs")
+  var request = await databaseController.getRequest(req.params.requestNo);
+  res.render("assigned-requests.ejs", { staff: req.user, requestData: request})
+})
+
+router.get("/download/upload/:filename", checkAuthenticated, async (req, res) => {
+  res.download(path.join(__dirname , "../uploads/" + req.params.filename));
 })
 
 module.exports = router;

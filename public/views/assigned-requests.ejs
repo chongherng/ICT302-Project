@@ -15,7 +15,7 @@
     <div id="dashboard-container">
         <nav role="navigation" class="flex-container">
             <div class="nav-left">
-                <a href="#">
+                <a href="/">
                     <img src="/img/Murdoch_logo-Pink.jpg" width="150px" style="display:inline-block">
                 </a>
             </div>
@@ -26,9 +26,11 @@
                     <span></span>
                     <span></span>
                     <ul id="menu">
-                        <li><p class="nav-name">John Doe</p><p class="nav-title">Senior Administration</p></li>
+                        <li><p class="nav-name"><%= staff.as_fname + " " + staff.as_lname %></p><p class="nav-title">Academic Staff</p></li>
                         <img class="float-left" src="/img/Logout-White.png" width="29px">
-                        <a class="float-left logout-btn" href="#"><li>Logout</li></a>
+                        <form action="/staff/logout?_method=DELETE" method="POST">
+                          <button class="float-left logout-btn" href="logout">Logout</button>
+                        </form>
                         <div class="clear-float"></div>
                     </ul>
                 </div>
@@ -42,21 +44,21 @@
         </div>
         <div class="new-requests-content">
             <div class="new-requests-top-content">
-                <p>Change of Major</p>
-                <p>CM584169</p>
+                <p><%= requestData.r_type %></p>
+                <p><%= requestData.r_NO%></p>
                 <p>Dscription of Requests</p>
-                <p>After thorough consideration i have decided that i wish to change my major to something which i am more comfortable with and have more confidence in</p>
+                <p><%= requestData.r_description %></p>
                 <div class="new-req-student-id float-left">
                     <p>Student ID</p>
-                    <p>33584169</p>
+                    <p><%= requestData.s_ID %></p>
                 </div>
                 <div class="new-req-student-name float-left">
                     <p>Student Name</p>
-                    <p>John Doe</p>
+                    <p><%= requestData.s_fname + " " + requestData.s_lname %></p>
                 </div>
                 <div class="clear-float"></div>
                 <div class="attached-file">
-                    <a href="#">
+                    <a href="/academic-staff/download<%= requestData.r_documentpath %>">
                         <div class="new-requests-attached-file-btn">
                             Attached File
                         </div>
