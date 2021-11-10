@@ -40,14 +40,15 @@ router.post("/submit", checkAuthenticated, upload.none(), async (req, res) => {
   var isValidated = await validationController.validateNewRequestForm(req.body);
   if(isValidated) {
     if(req.body.action == "Assign"){
-      workflowController.assignNewRequest(req.body, req.user);
+      await workflowController.assignNewRequest(req.body, req.user);
     } 
     if(req.body.action == "Reject"){
-      workflowController.rejectRequest(req.body);
+      await workflowController.rejectRequest(req.body);
     }
     if(req.body.action == "Request More Info"){
-      workflowController.requestMoreInfo(req.body);
+      await workflowController.requestMoreInfo(req.body);
     }
+    res.redirect("/sam/" + req.user.sam_ID);
   } else {
     return res.sendStatus(400);
   }

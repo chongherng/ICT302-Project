@@ -28,14 +28,15 @@ router.post("/submit", checkAuthenticated, upload.none(), async (req, res) => {
   if (isValidated) {
     console.log(req.body.action);
     if (req.body.action == "Approve") {
-      workflowController.approveAssignedRequest(req.body, req.user);
+      await workflowController.approveAssignedRequest(req.body, req.user);
     }
     if (req.body.action == "Reject") {
-      workflowController.rejectRequest(req.body);
+      await workflowController.rejectRequest(req.body);
     }
     if (req.body.action == "Request More Info") {
-      workflowController.requestMoreInfo(req.body);
+      await workflowController.requestMoreInfo(req.body);
     }
+    res.redirect("/academic-staff/" + req.user.as_ID);
   } else {
     return res.sendStatus(400);
   }
