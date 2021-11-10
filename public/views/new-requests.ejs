@@ -66,6 +66,10 @@
                 </div>
             </div>
             <form name="new-request" action="/sam/submit" id="new-requests-form" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="requestNo" value="<%= requestData.r_NO%>">
+                <input type="hidden" name="requestType" value="<%= requestData.r_type%>">
+                <input type="hidden" name="studentName" value="<%= requestData.s_fname + " " + requestData.s_lname %>">
+                <input type="hidden" name="studentID" value="<%= requestData.s_ID%>">
                 <div class="float-left">
                     <select class="select-staff-dropdown" name="selectedAcademicStaff">
                     <option value="" disabled selected>Academic Staff Assigned</option>

@@ -31,11 +31,27 @@ const validateSSSForm = async (data, file) => {
 };
 
 const validateNewRequestForm = async (data) => {
-  var academicStaff = await databaseController.findAcademicStaff(data.selectedAcademicStaff);
-  if(academicStaff == null || data.duedate == "" || (new Date(data.duedate) <= Date.now())) {
+  // validate request number
+  if(await databaseController.getRequest(data.requestNo) == null){
     return false;
   }
-  return true;
+  // validate request form data
+  if(data.action == "Assign") {
+    var academicStaff = await databaseController.findAcademicStaff(data.selectedAcademicStaff);
+    if(academicStaff == null || data.duedate == "" || (new Date(data.duedate) <= Date.now())) {
+      return false;
+    }
+    return true;
+  }
+  if(data.action == "Reject") {
+    return true;
+  }
+  if(data.action == "More Info Required"){
+    if(data.comment == "" || data.comment == null){
+      return false;
+    }
+    return true;
+  }
   
 }
 

@@ -188,6 +188,17 @@ const getAllAcademicStaff = async () => {
   }
 }
 
+const setRequestStatus = async (requestNo, requestStatus) => {
+  try {
+    var con = await mysql.createConnection(databaseInfo);
+
+    await con.query(
+      "Update Request SET r_status = " + mysql.escape(requestStatus) + " WHERE r_NO = " + mysql.escape(requestNo) + ";");
+  } catch (err) {
+    console.log(err);
+  }
+} 
+
 const getRequestPrefix = (requestType) => {
   switch (requestType) {
     case "Study Plan":
@@ -198,7 +209,6 @@ const getRequestPrefix = (requestType) => {
       break;
   }
 };
-
 
 module.exports = {
   findStudent,
@@ -211,4 +221,5 @@ module.exports = {
   getRequest,
   getAllAcademicStaff,
   findAcademicStaff,
+  setRequestStatus,
 };
