@@ -81,7 +81,7 @@ const getAllRequestForAcademicStaff = async (academicStaffID) => {
     var con = await mysql.createConnection(databaseInfo);
 
     var [rows, fields] = await con.query(
-      "SELECT * FROM Request INNER JOIN Student ON Request.s_id=Student.s_id INNER JOIN Sam ON Request.sam_id=Sam.sam_id WHERE as_ID = '" + academicStaffID + "' AND r_status = 'Assigned Request'" 
+      "SELECT *, DATE_FORMAT(r_duedate, '%d/%m/%Y') AS r_duedate FROM Request INNER JOIN Student ON Request.s_id=Student.s_id INNER JOIN Sam ON Request.sam_id=Sam.sam_id WHERE as_ID = '" + academicStaffID + "' AND r_status = 'Assigned Request'" 
     );
     return rows;
   } catch (err) {
@@ -226,12 +226,32 @@ const setAcademicStaffOnRequest = async (requestNo, academicStaffID) => {
   }
 }
 
-const setSamIDOnRequest = async  (requestNo, samID) => {
+const setSamIDOnRequest = async (requestNo, samID) => {
   try {
     var con = await mysql.createConnection(databaseInfo);
 
     await con.query(
       "Update Request SET sam_ID = " + mysql.escape(samID) + " WHERE r_NO = " + mysql.escape(requestNo) + ";");
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const setRequestDueDate = async (requestNo, duedate) => {
+  try {
+    var con = await mysql.createConnection(databaseInfo);
+
+    await con.query( "Update Request SET r_duedate = " + mysql.escape(duedate) + " WHERE r_NO = " + mysql.escape(requestNo) + ";");
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const setRequestComments = async (requestNo, comments) => {
+  try {
+    var con = await mysql.createConnection(databaseInfo);
+
+    await con.query( "Update Request SET r_comments = " + mysql.escape(comments) + " WHERE r_NO = " + mysql.escape(requestNo) + ";");
   } catch (err) {
     console.log(err);
   }
@@ -263,4 +283,6 @@ module.exports = {
   setRequestStatus,
   setAcademicStaffOnRequest,
   setSamIDOnRequest,
+  setRequestDueDate,
+  setRequestComments,
 };

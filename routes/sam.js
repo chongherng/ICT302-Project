@@ -42,11 +42,11 @@ router.get("/:id/request/rejected/:requestNo", checkAuthenticated, async (req, r
 
 router.get("/:id/request/partial/:requestNo", checkAuthenticated, async (req, res) => {
   if(await validationController.validateRequestFormLink(req.params.requestNo, "Partial Request")){
-    res.sendStatus(200);
+    res.render("partial-requests.ejs");
   } else {
     res.status(410).send("The request does not exists");
   }
-  //res.render("partial-requests.ejs");
+  
 })
 
 router.get("/download/upload/:filename", checkAuthenticated, async (req, res) => {

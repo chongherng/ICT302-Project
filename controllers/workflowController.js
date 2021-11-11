@@ -76,9 +76,12 @@ const rejectRequest = async (data) => {
 
 const assignNewRequest = async (data, SAM) => {
   try {
+    console.log(data);
     await databaseController.setRequestStatus(data.requestNo, "Assigned Request");
     await databaseController.setSamIDOnRequest(data.requestNo, SAM.sam_ID);
     await databaseController.setAcademicStaffOnRequest(data.requestNo, data.selectedAcademicStaff);
+    await databaseController.setRequestDueDate(data.requestNo, data.duedate);
+    await databaseController.setRequestComments(data.requestNo, data.comment);
     var academicStaff = await databaseController.findAcademicStaff(data.selectedAcademicStaff);
     var subject = "Request " + data.requestNo + " has been assigned to you";
     var content = `<p>Greetings ${academicStaff.as_fname + " " + academicStaff.as_lname },</p>
