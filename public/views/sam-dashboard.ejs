@@ -48,21 +48,35 @@
                         <table id="feed">
                             <thead>
                                 <th>Task ID</th>
-                                <th>Student ID</th>
-                                <th>Student Name</th>
+                                <th>Requestor ID</th>
+                                <th>Requestor Name</th>
                                 <th>Request Type</th>
                             </thead>
                             <tbody>
-                                <% requestData.forEach((request) => { %>
-                                    <% if(request.r_status == "New Request") { %>
-                                        <tr data-href="/sam/<%= staff.sam_ID %>/request/new/<%= request.r_NO %>" class="clickable">
-                                            <td><%= request.r_NO %></td>
-                                            <td><%= request.s_ID %></td>
-                                            <td><%= request.s_fname + " " + request.s_lname %></td>
-                                            <td><%= request.r_type %></td>
-                                        </tr>
-                                    <% } %>
-                                <% }); %>
+                                <% if(studentRequestData != null) {%>
+                                    <% studentRequestData.forEach((request) => { %>
+                                        <% if(request.r_status == "New Request") { %>
+                                            <tr data-href="/sam/<%= staff.sam_ID %>/request/new/<%= request.r_NO %>" class="clickable">
+                                                <td><%= request.r_NO %></td>
+                                                <td><%= request.s_ID %></td>
+                                                <td><%= request.s_fname + " " + request.s_lname %></td>
+                                                <td><%= request.r_type %></td>
+                                            </tr>
+                                        <% }; %>
+                                    <% }); %>
+                                <% } %>
+                                <% if(sssRequestData != null) {%>
+                                    <% sssRequestData.forEach((request) => { %>
+                                        <% if(request.r_status == "New Request") { %>
+                                            <tr data-href="/sam/<%= staff.sam_ID %>/request/new/<%= request.r_NO %>" class="clickable">
+                                                <td><%= request.r_NO %></td>
+                                                <td><%= request.sss_ID %></td>
+                                                <td><%= request.sss_fname + " " + request.sss_lname %></td>
+                                                <td><%= request.r_type %></td>
+                                            </tr>
+                                        <% } %>
+                                    <% }); %>
+                                <% } %>
                             </tbody>
                         </table>
                     </div>
@@ -73,25 +87,39 @@
                         <img src="/img/Tick-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
                         <p>Approved Requests</p>
                     </div>
-                    <div class= outer-table>
+                    <div class= "outer-table">
                         <table id="feed">
                             <thead>
                                 <th>Task ID</th>
-                                <th>Student ID</th>
-                                <th>Student Name</th>
+                                <th>Requestor ID</th>
+                                <th>Requestor Name</th>
                                 <th>Request Type</th>
                             </thead>
                             <tbody>
-                                <% requestData.forEach((request) => { %>
-                                    <% if(request.r_status == "Approved Request") { %>
-                                        <tr data-href="/sam/<%= staff.sam_ID %>/request/approved/<%= request.r_NO %>" class="clickable">
-                                            <td><%= request.r_NO %></td>
-                                            <td><%= request.s_ID %></td>
-                                            <td><%= request.s_fname + " " + request.s_lname %></td>
-                                            <td><%= request.r_type %></td>
-                                        </tr>
-                                    <% } %>
-                                <% }); %>
+                                <% if(studentRequestData !=null) {%>
+                                    <% studentRequestData.forEach((request) => { %>
+                                        <% if(request.r_status == "Approved Request") { %>
+                                            <tr data-href="/sam/<%= staff.sam_ID %>/request/approved/full" class="clickable">
+                                                <td><%= request.r_NO %></td>
+                                                <td><%= request.s_ID %></td>
+                                                <td><%= request.s_fname + " " + request.s_lname %></td>
+                                                <td><%= request.r_type %></td>
+                                            </tr>
+                                        <% } %>
+                                    <% }); %>
+                                <% } %>
+                                <% if(sssRequestData !=null) {%>
+                                    <% sssRequestData.forEach((request) => { %>
+                                        <% if(request.r_status == "Approved Request") { %>
+                                            <tr data-href="/sam/<%= staff.sam_ID %>/request/approved/full" class="clickable">
+                                                <td><%= request.r_NO %></td>
+                                                <td><%= request.sss_ID %></td>
+                                                <td><%= request.sss_fname + " " + request.sss_lname %></td>
+                                                <td><%= request.r_type %></td>
+                                            </tr>
+                                        <% } %>
+                                    <% }); %>
+                                <% } %>
                             </tbody>
                         </table>
                     </div>
@@ -109,21 +137,35 @@
                         <table id="feed">
                             <thead>
                                 <th>Task ID</th>
-                                <th>Student ID</th>
-                                <th>Student Name</th>
+                                <th>Requestor ID</th>
+                                <th>Requestor Name</th>
                                 <th>Request Type</th>
                             </thead>
                             <tbody>
-                                <% requestData.forEach((request) => { %>
-                                    <% if(request.r_status == "Partial Request") { %>
-                                        <tr data-href="/sam/<%= staff.sam_ID %>/request/partial/<%= request.r_NO %>" class="clickable">
-                                            <td><%= request.r_NO %></td>
-                                            <td><%= request.s_ID %></td>
-                                            <td><%= request.s_fname + " " + request.s_lname %></td>
-                                            <td><%= request.r_type %></td>
-                                        </tr>
-                                    <% } %>
-                                <% }); %>
+                                <% if(studentRequestData !=null) {%>
+                                    <% studentRequestData.forEach((request) => { %>
+                                        <% if(request.r_status == "Partial Request") { %>
+                                            <tr data-href="/sam/<%= staff.sam_ID %>/request/partial/<%= request.r_NO %>" class="clickable">
+                                                <td><%= request.r_NO %></td>
+                                                <td><%= request.s_ID %></td>
+                                                <td><%= request.s_fname + " " + request.s_lname %></td>
+                                                <td><%= request.r_type %></td>
+                                            </tr>
+                                        <% } %>
+                                    <% }); %>
+                                <% } %>
+                                <% if(sssRequestData !=null) {%>
+                                    <% sssRequestData.forEach((request) => { %>
+                                        <% if(request.r_status == "Partial Request") { %>
+                                            <tr data-href="/sam/<%= staff.sam_ID %>/request/partial/<%= request.r_NO %>" class="clickable">
+                                                <td><%= request.r_NO %></td>
+                                                <td><%= request.sss_ID %></td>
+                                                <td><%= request.sss_fname + " " + request.sss_lname %></td>
+                                                <td><%= request.r_type %></td>
+                                            </tr>
+                                        <% } %>
+                                    <% }); %>
+                                <% } %>
                             </tbody>
                         </table>
                     </div>
@@ -138,21 +180,35 @@
                         <table id="feed">
                             <thead>
                                 <th>Task ID</th>
-                                <th>Student ID</th>
-                                <th>Student Name</th>
+                                <th>Requestor ID</th>
+                                <th>Requestor Name</th>
                                 <th>Request Type</th>
                             </thead>
                             <tbody>
-                                <% requestData.forEach((request) => { %>
-                                    <% if(request.r_status == "Rejected Request") { %>
-                                        <tr data-href="/sam/<%= staff.sam_ID %>/request/rejected/full" class="clickable"> 
-                                            <td><%= request.r_NO %></td>
-                                            <td><%= request.s_ID %></td>
-                                            <td><%= request.s_fname + " " + request.s_lname %></td>
-                                            <td><%= request.r_type %></td>
-                                        </tr>
-                                    <% } %>
-                                <% }); %>
+                                <% if(studentRequestData !=null) {%>
+                                    <% studentRequestData.forEach((request) => { %>
+                                        <% if(request.r_status == "Rejected Request") { %>
+                                            <tr data-href="/sam/<%= staff.sam_ID %>/request/rejected/full" class="clickable"> 
+                                                <td><%= request.r_NO %></td>
+                                                <td><%= request.s_ID %></td>
+                                                <td><%= request.s_fname + " " + request.s_lname %></td>
+                                                <td><%= request.r_type %></td>
+                                            </tr>
+                                        <% } %>
+                                    <% }); %>
+                                <% } %>
+                                <% if(sssRequestData !=null) {%>
+                                    <% sssRequestData.forEach((request) => { %>
+                                        <% if(request.r_status == "Rejected Request") { %>
+                                            <tr data-href="/sam/<%= staff.sam_ID %>/request/rejected/full" class="clickable"> 
+                                                <td><%= request.r_NO %></td>
+                                                <td><%= request.sss_ID %></td>
+                                                <td><%= request.sss_fname + " " + request.sss_lname %></td>
+                                                <td><%= request.r_type %></td>
+                                            </tr>
+                                        <% } %>
+                                    <% }); %>
+                                <% } %>
                             </tbody>
                         </table>
                     </div>
@@ -252,10 +308,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const actualBtn = document.getElementById('actual-btn');
 
 const fileChosen = document.getElementById('file-chosen');
-
-actualBtn.addEventListener('change', function(){
-fileChosen.textContent = this.files[0].name
-})
 
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";

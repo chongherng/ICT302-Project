@@ -48,14 +48,15 @@
                         <table id="feed">
                             <thead class="academic-thead">
                                 <th>Task ID</th>
-                                <th>Student ID</th>
-                                <th>Student Name</th>
+                                <th>Requestor ID</th>
+                                <th>Requestor Name</th>
                                 <th>Request Type</th>
                                 <th>Due Date</th>
                                 <th>SAM</th>
                             </thead>
                             <tbody class="academic-tbody">
-                                <% requestData.forEach((request) => { %>
+                              <% if(studentRequestData !=null) {%>
+                                <% studentRequestData.forEach((request) => { %>
                                     <% if(request.r_status == "Assigned Request") { %>
                                       <tr data-href="/academic-staff/<%= staff.as_ID %>/request/assigned/<%= request.r_NO %>" class="clickable">
                                             <td><%= request.r_NO %></td>
@@ -67,6 +68,21 @@
                                         </tr>
                                     <% } %>
                                 <% }); %>
+                              <% } %>
+                              <% if(sssRequestData !=null) {%>
+                                <% sssRequestData.forEach((request) => { %>
+                                    <% if(request.r_status == "Assigned Request") { %>
+                                      <tr data-href="/academic-staff/<%= staff.as_ID %>/request/assigned/<%= request.r_NO %>" class="clickable">
+                                            <td><%= request.r_NO %></td>
+                                            <td><%= request.sss_ID %></td>
+                                            <td><%= request.sss_fname + " " + request.sss_lname %></td>
+                                            <td><%= request.r_type %></td>
+                                            <td><%= request.r_duedate %></td>
+                                            <td><%= request.sam_fname + " " + request.sam_lname %></td>
+                                        </tr>
+                                    <% } %>
+                                <% }); %>
+                              <% } %>
                             </tbody>
                         </table>
                     </div>

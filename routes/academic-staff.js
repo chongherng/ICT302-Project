@@ -9,14 +9,15 @@ const multer = require("multer");
 const upload = multer({ dest: "" });
 
 router.get("/:id", checkAuthenticated, async (req, res) => {
-  var requestList = await databaseController.getAllRequestForAcademicStaff(req.user.as_ID);
-  res.render("academic-staff-dashboard.ejs", { staff: req.user, requestData: requestList});
+  var studentRequestList = await databaseController.getAllStudentRequestForAcademicStaff(req.user.as_ID);
+  var sssRequestList = await databaseController.getAllSSSRequestForAcademicStaff(req.user.as_ID);
+  res.render("academic-staff-dashboard.ejs", { staff: req.user, studentRequestData: studentRequestList, sssRequestData: sssRequestList });
 });
 
 
 router.get("/:id/request/assigned/:requestNo", checkAuthenticated, async (req, res) => {
   if(await validationController.validateRequestFormLink(req.params.requestNo, "Assigned Request")) {
-    var request = await databaseController.getRequest(req.params.requestNo);
+    var request = await databaseController.getRequestWithRequestNo(req.params.requestNo);
     res.render("assigned-requests.ejs", { staff: req.user, requestData: request})
   } else {
     res.status(410).send("The request does not exists");

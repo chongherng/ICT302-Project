@@ -49,12 +49,12 @@
                 <p>Description of Requests</p>
                 <p><%= requestData.r_description %></p>
                 <div class="new-req-student-id float-left">
-                    <p>Student ID</p>
-                    <p><%= requestData.s_ID %></p>
+                    <p>Requestor ID</p>
+                    <p><%= requestData.s_ID || requestData.sss_ID %></p>
                 </div>
                 <div class="new-req-student-name float-left">
-                    <p>Student Name</p>
-                    <p><%= requestData.s_fname + " " + requestData.s_lname %></p>
+                    <p>Requestor Name</p>
+                    <p><%= requestData.s_fname ? (requestData.s_fname + " " + requestData.s_lname) : (requestData.sss_fname + " " + requestData.sss_lname) %></p>
                 </div>
                 <div class="clear-float"></div>
                 <div class="attached-file">
@@ -68,8 +68,8 @@
             <form name="new-request" action="/sam/<%= staff.sam_ID %>/request/new/<%= requestData.r_NO %>/submit" id="new-requests-form" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="requestNo" value="<%= requestData.r_NO%>">
                 <input type="hidden" name="requestType" value="<%= requestData.r_type%>">
-                <input type="hidden" name="studentName" value="<%= requestData.s_fname + " " + requestData.s_lname %>">
-                <input type="hidden" name="studentID" value="<%= requestData.s_ID%>">
+                <input type="hidden" name="requestorName" value="<%= requestData.s_fname ? (requestData.s_fname + " " + requestData.s_lname) : (requestData.sss_fname + " " + requestData.sss_lname) %>">
+                <input type="hidden" name="requestorID" value="<%= requestData.s_ID || requestData.sss_ID %>">
                 <div class="float-left">
                     <select class="select-staff-dropdown" name="selectedAcademicStaff">
                     <option value="" disabled selected>Academic Staff Assigned</option>

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../script/script.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
+    <script src="/script/script.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600;700&display=swap" rel="stylesheet">
@@ -15,8 +15,8 @@
     <div id="dashboard-container">
         <nav role="navigation" class="flex-container">
             <div class="nav-left">
-                <a href="#">
-                    <img src="../img/Murdoch_logo-Pink.jpg" width="150px" style="display:inline-block">
+                <a href="/">
+                    <img src="/img/Murdoch_logo-Pink.jpg" width="150px" style="display:inline-block">
                 </a>
             </div>
             <div class="nav-right">
@@ -26,9 +26,11 @@
                     <span></span>
                     <span></span>
                     <ul id="menu">
-                        <li><p class="nav-name">John Doe</p><p class="nav-title">Senior Administration</p></li>
-                        <img class="float-left" src="../img/Logout-White.png" width="29px">
-                        <a class="float-left logout-btn" href="#"><li>Logout</li></a>
+                        <li><p class="nav-name"><%= staff.sam_fname + " " + staff.sam_lname %></p><p class="nav-title">Senior Administration</p></li>
+                        <img class="float-left" src="/img/Logout-White.png" width="29px">
+                        <form action="/staff/logout?_method=DELETE" method="POST">
+                          <button class="float-left logout-btn" href="logout">Logout</button>
+                        </form>
                         <div class="clear-float"></div>
                     </ul>
                 </div>
@@ -37,26 +39,26 @@
     </div>
     <div class="new-requests-container-inner">
         <div class="dashboard-titles">
-            <img src="../img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
+            <img src="/img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
             <p>Approved Requests (Edit)</p>
         </div>
         <div class="new-requests-content">
             <div class="new-requests-top-content">
-                <p>Change of Major</p>
-                <p>CM584169</p>
-                <p>Dscription of Requests</p>
-                <p>After thorough consideration i have decided that i wish to change my major to something which i am more comfortable with and have more confidence in</p>
+                <p><%= requestData.r_type %></p>
+                <p><%= requestData.r_NO%></p>
+                <p>Description of Requests</p>
+                <p><%= requestData.r_description %></p>
                 <div class="new-req-student-id float-left">
-                    <p>Student ID</p>
-                    <p>33584169</p>
+                    <p>Requestor ID</p>
+                    <p><%= requestData.s_ID || requestData.sss_ID %></p>
                 </div>
                 <div class="new-req-student-name float-left">
-                    <p>Student Name</p>
-                    <p>John Doe</p>
+                    <p>Requestor Name</p>
+                    <p><%= requestData.s_fname ? (requestData.s_fname + " " + requestData.s_lname) : (requestData.sss_fname + " " + requestData.sss_lname) %></p>
                 </div>
                 <div class="clear-float"></div>
                 <div class="attached-file">
-                    <a href="#">
+                    <a href="/sam/download<%= requestData.r_documentpath %>">
                         <div class="new-requests-attached-file-btn">
                             Attached File
                         </div>
@@ -65,13 +67,16 @@
             </div>
             <div class="staff-comments">
                 <p>Staff Comments</p>
-                <p>After consideration application has been approved due to valid evidence</p>
+                <p><%= requestData.r_comments %></p>
             </div>
-            <form name="assigned-request" action="#" id="partial-requests-form" method="POST">
+            <form name="assigned-request" action="/sam/<%= staff.sam_ID%>/request/approved/<%= requestData.r_NO %>/edit" id="partial-requests-form" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="requestNo" value="<%= requestData.r_NO%>">
+                <input type="hidden" name="requestType" value="<%= requestData.r_type%>">
+                <input type="hidden" name="requestorName" value="<%= requestData.s_fname ? (requestData.s_fname + " " + requestData.s_lname) : (requestData.sss_fname + " " + requestData.sss_lname) %>">
+                <input type="hidden" name="requestorID" value="<%= requestData.s_ID || requestData.sss_ID %>">
                 <br>
 
                 <br>
-                <input class="partial-assign-btn" type="submit" name="action" value="Approve">
                 <input class="partial-reject-btn" type="submit" name="action" value="Reject">
               </form>
         </div>

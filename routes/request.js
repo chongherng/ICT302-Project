@@ -44,8 +44,8 @@ router.post("/student-support-staff/submit", upload.single('file'), async (req, 
   var isValidated = await validateFormController.validateSSSForm(req.body, req.file);
   if (isValidated) {
     try {
-      await workFlowController.newSSSRequestToDatabase(req.body, req.file);
-      await workFlowController.newRequestEmailToSAM(req.body.StudentSupportStaffID,"SSS", req.body.requestType);
+      var requestNo = await workFlowController.newSSSRequestToDatabase(req.body, req.file);
+      await workFlowController.newRequestEmailToSAM(req.body.StudentSupportStaffID,"SSS", req.body.requestType, requestNo);
       return res.redirect("/request/completed");
     } catch {}
   }

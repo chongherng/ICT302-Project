@@ -40,7 +40,6 @@ const newRequestEmailToSAM = async (requestorID, requestorType, requestType, req
   }
   var SAMList = await databaseController.getAllSAM();
 
-
   // email to each SAM
   SAMList.forEach((SAM) => {
     var content = 
@@ -62,14 +61,16 @@ const rejectRequest = async (data) => {
     await databaseController.setRequestStatus(data.requestNo, "Rejected Request");
     await databaseController.setRequestComments(data.requestNo, data.comment);
     var subject = "The request " + data.requestNo + " has been rejected";
-    var student = await databaseController.findStudent(data.studentID);
-    var content = `<p>Greetings ${data.studentName}, ${data.studentID} </p>
+    var student = await databaseController.findStudent(data.requestorID);
+    var sss = await databaseController.findStudentSupportStaff(data.requestorID);
+    var receiverEmail = student != null ? student.s_email : sss.sss_email;
+    var content = `<p>Greetings ${data.requestorName}, ${data.requestorID} </p>
       <br>
       <p>The request that you have submitted ${data.requestNo}, ${data.requestType} has been rejected.</p>
       <br>
       <p>Regards,<p>
       <p>System Auto-Generated Message<p>`;
-    mailController.sendEmail(subject, student.s_email, content);
+    mailController.sendEmail(subject, receiverEmail , content);
   } catch(err) {
     console.log(err);
   }
@@ -79,14 +80,16 @@ const finalApprovalRequest = async (data) => {
   try {
     await databaseController.setRequestStatus(data.requestNo, "Approved Request");
     var subject = "The request " + data.requestNo + " has been approved";
-    var student = await databaseController.findStudent(data.studentID);
-    var content = `<p>Greetings ${data.studentName}, ${data.studentID} </p>
+    var student = await databaseController.findStudent(data.requestorID);
+    var sss = await databaseController.findStudentSupportStaff(data.requestorID);
+    var receiverEmail = student != null ? student.s_email : sss.sss_email;
+    var content = `<p>Greetings ${data.requestorName}, ${data.requestorID} </p>
       <br>
       <p>The request that you have submitted ${data.requestNo}, ${data.requestType} has been approved.</p>
       <br>
       <p>Regards,<p>
       <p>System Auto-Generated Message<p>`;
-    mailController.sendEmail(subject, student.s_email, content);
+    mailController.sendEmail(subject, receiverEmail, content);
   } catch(err) {
     console.log(err);
   }
@@ -120,8 +123,10 @@ const requestMoreInfo = async (data) => {
   try {
     await databaseController.setRequestStatus(data.requestNo, "Rejected Request");
     var subject = "More information required for  " + data.requestNo + "";
-    var student = await databaseController.findStudent(data.studentID);
-    var content = `<p>Greetings ${data.studentName}, ${data.studentID} </p>
+    var student = await databaseController.findStudent(data.requestorID);
+    var sss = await databaseController.findStudentSupportStaff(data.requestorID);
+    var receiverEmail = student != null ? student.s_email : sss.sss_email;
+    var content = `<p>Greetings ${data.requestorName}, ${data.requestorID} </p>
       <br>
       <p>The request that you have submitted ${data.requestNo}, ${data.requestType} contains insufficient information.</p>
       <p>Please resubmit the request form with the following additional information: </p>
@@ -129,7 +134,7 @@ const requestMoreInfo = async (data) => {
       <br>
       <p>Regards,<p>
       <p>System Auto-Generated Message<p>`;
-    mailController.sendEmail(subject, student.s_email, content);
+    mailController.sendEmail(subject, receiverEmail, content);
   } catch(err) {
     console.log(err);
   }
@@ -138,7 +143,7 @@ const requestMoreInfo = async (data) => {
 const approveAssignedRequest = async (data, academicStaff) => {
 try {
     await databaseController.setRequestStatus(data.requestNo, "Partial Request");
-    var request = await databaseController.getRequest(data.requestNo);
+    var request = await databaseController.findRequest(data.requestNo);
     var SAM = await databaseController.findSAM(request.sam_ID)
     var subject = "Pending actions for Partial Request " + data.requestNo + "";
     var content = `<p>Greetings ${SAM.sam_fname + " " + SAM.sam_lname },</p>
@@ -159,15 +164,36 @@ try {
 const rejectedRequestReapproval = async (data) => {
   try {
     await databaseController.setRequestStatus(data.requestNo, "Approved Request");
-    var subject = "The request " + data.requestNo + " has been Reapproved";
-    var student = await databaseController.findStudent(data.studentID);
-    var content = `<p>Greetings ${data.studentName}, ${data.studentID} </p>
+    var subject = "The request " + data.requestNo + " has been reapproved";
+    var student = await databaseController.findStudent(data.requestorID);
+    var sss = await databaseController.findStudentSupportStaff(data.requestorID);
+    var receiverEmail = student != null ? student.s_email : sss.sss_email;
+    var content = `<p>Greetings ${data.requestorName}, ${data.requestorID} </p>
       <br>
       <p>After consideration, the request that you have submitted ${data.requestNo}, ${data.requestType} has been reapproved.</p>
       <br>
       <p>Regards,<p>
       <p>System Auto-Generated Message<p>`;
-    mailController.sendEmail(subject, student.s_email, content);
+    mailController.sendEmail(subject, receiverEmail, content);
+  } catch(err) {
+    console.log(err);
+  }
+}
+
+const approvedRequestRejection = async (data) => {
+  try {
+    await databaseController.setRequestStatus(data.requestNo, "Rejected Request");
+    var subject = "The approved request " + data.requestNo + " has been rejected";
+    var student = await databaseController.findStudent(data.requestorID);
+    var sss = await databaseController.findStudentSupportStaff(data.requestorID);
+    var receiverEmail = student != null ? student.s_email : sss.sss_email;
+    var content = `<p>Greetings ${data.requestorName}, ${data.requestorID} </p>
+      <br>
+      <p>After consideration, the approved request that you have submitted ${data.requestNo}, ${data.requestType} has been rejected.</p>
+      <br>
+      <p>Regards,<p>
+      <p>System Auto-Generated Message<p>`;
+    mailController.sendEmail(subject, receiverEmail, content);
   } catch(err) {
     console.log(err);
   }
@@ -183,4 +209,5 @@ module.exports = {
   approveAssignedRequest,
   finalApprovalRequest,
   rejectedRequestReapproval,
+  approvedRequestRejection,
 };

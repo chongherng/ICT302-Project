@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600;700&display=swap" rel="stylesheet">
-    <title>Rejected Requests</title>
+    <title>Approved Requests</title>
 </head>
 <body class="dashboard-bg">
     <div id="dashboard-container">
@@ -40,8 +40,8 @@
             <div class="sam-dashboard-top-content">
                 <div class="approved-requests-container-inner">
                     <div class="dashboard-titles">
-                        <img src="/img/Cross-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
-                        <p>Rejected Requests</p>
+                        <img src="/img/Tick-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
+                        <p>Approved Requests</p>
                     </div>
                     <div class="clear-float"></div>
                     <div class= outer-table>
@@ -57,28 +57,28 @@
                             <tbody class="academic-tbody">
                                 <% if(studentRequestData !=null) {%>
                                     <% studentRequestData.forEach((request) => { %>
-                                        <% if(request.r_status == "Rejected Request") { %>
-                                            <tr data-href="/sam/<%= staff.sam_ID %>/request/rejected/full" class="clickable"> 
+                                        <% if(request.r_status == "Approved Request") { %>
+                                            <tr data-href="/sam/<%= staff.sam_ID %>/request/approved/full" class="clickable"> 
                                                 <td><%= request.r_NO %></td>
                                                 <td><%= request.s_ID %></td>
                                                 <td><%= request.s_fname + " " + request.s_lname %></td>
                                                 <td><%= request.r_type %></td>
                                                 <td><%= request.r_comments%></td>
-                                                <td><a href="/sam/<%= staff.sam_ID %>/request/rejected/<%= request.r_NO %>"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
+                                                <td><a href="/sam/<%= staff.sam_ID %>/request/approved/<%= request.r_NO %>"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
                                             </tr>
                                         <% } %>
                                     <% }); %>
                                 <% } %>
                                 <% if(sssRequestData !=null) {%>
                                     <% sssRequestData.forEach((request) => { %>
-                                        <% if(request.r_status == "Rejected Request") { %>
-                                            <tr data-href="/sam/<%= staff.sam_ID %>/request/rejected/full" class="clickable"> 
+                                        <% if(request.r_status == "Approved Request") { %>
+                                            <tr data-href="/sam/<%= staff.sam_ID %>/request/approved/full" class="clickable"> 
                                                 <td><%= request.r_NO %></td>
                                                 <td><%= request.sss_ID %></td>
                                                 <td><%= request.sss_fname + " " + request.sss_lname %></td>
                                                 <td><%= request.r_type %></td>
                                                 <td><%= request.r_comments%></td>
-                                                <td><a href="/sam/<%= staff.sam_ID %>/request/rejected/<%= request.r_NO %>"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
+                                                <td><a href="/sam/<%= staff.sam_ID %>/request/approved/<%= request.r_NO %>"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
                                             </tr>
                                         <% } %>
                                     <% }); %>

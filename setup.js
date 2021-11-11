@@ -121,18 +121,18 @@ var studentValues = [
 ];
 
 var supportStaffValues = [
-  ["34612578", "Jake", "Crew"],
-  ["34623154", "Sam", "Teo"],
-  ["34920666", "Isabella", "Lim"],
-  ["34684213", "Issac", "Tan"],
-  ["34274014", "Joe", "Parker"],
-  ["34799060", "James", "Lee"],
-  ["34280966", "Jennifer", "Lawrence"],
-  ["34394990", "Joseph", "Khoo"],
-  ["34321527", "Kai", "Reyes"],
-  ["34260675", "Linsey", "Sterling"],
-  ["34895027", "Lionne", "Davinci"],
-  ["34516640", "Moses", "Reed"],
+  ["34612578", "Jake", "Crew", "chong_herng@hotmail.com"],
+  ["34623154", "Sam", "Teo", "asd@ict.test"],
+  ["34920666", "Isabella", "Lim", "asd@ict.test"],
+  ["34684213", "Issac", "Tan", "asd@ict.test"],
+  ["34274014", "Joe", "Parker", "asd@ict.test"],
+  ["34799060", "James", "Lee", "asd@ict.test"],
+  ["34280966", "Jennifer", "Lawrence", "asd@ict.test"],
+  ["34394990", "Joseph", "Khoo", "asd@ict.test"],
+  ["34321527", "Kai", "Reyes", "asd@ict.test"],
+  ["34260675", "Linsey", "Sterling", "asd@ict.test"],
+  ["34895027", "Lionne", "Davinci", "asd@ict.test"],
+  ["34516640", "Moses", "Reed", "asd@ict.test"],
 ];
 
 // password for SAM1: password123
@@ -282,7 +282,7 @@ const setupDatabase = () => {
 
     // Student Support Staff Table
     sql =
-      "CREATE TABLE StudentSupportStaff (sss_ID VARCHAR(8) PRIMARY KEY, sss_fname VARCHAR(50) NOT NULL, sss_lname VARCHAR(30) NOT NULL)";
+      "CREATE TABLE StudentSupportStaff (sss_ID VARCHAR(8) PRIMARY KEY, sss_fname VARCHAR(50) NOT NULL, sss_lname VARCHAR(30) NOT NULL, sss_email VARCHAR(100) NOT NULL)";
     con.query(sql, function (err, result) {
       err ? console.log(err.sqlMessage) : console.log("SSS table created");
     });

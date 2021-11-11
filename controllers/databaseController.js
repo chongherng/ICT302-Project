@@ -36,6 +36,8 @@ const findStudentSupportStaff = async (studentSupportStaffID) => {
   }
 };
 
+
+
 const findAcademicStaff = async (academicStaffID) => {
   try {
     var con = await mysql.createConnection(databaseInfo);
@@ -64,6 +66,18 @@ const findSAM = async (samID) => {
   }
 }
 
+const findRequest = async (requestNo) => {
+  try {
+    var con = await mysql.createConnection(databaseInfo);
+
+    var [rows, fields] = await con.query(
+      "SELECT * FROM Request WHERE r_NO = '" + requestNo + "';");
+    return rows[0];
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // query
 const getAllRequestWithStudent = async () => {
   try {
@@ -76,7 +90,40 @@ const getAllRequestWithStudent = async () => {
   }
 }
 
-const getAllRequestForAcademicStaff = async (academicStaffID) => {
+const getRequestWithRequestNo = async (requestNo) => {
+  try {
+    var con = await mysql.createConnection(databaseInfo);
+
+    var [rows, fields] = await con.query(
+      "SELECT * FROM Request INNER JOIN Student ON Request.s_id=Student.s_id WHERE r_NO = '" +
+        requestNo +
+        "';"
+    );
+    if (rows[0] == null) {
+      [rows, fields] = await con.query(
+        "SELECT * FROM Request INNER JOIN StudentSupportStaff sss ON Request.sss_id=sss.sss_id WHERE r_NO = '" +
+          requestNo +
+          "';"
+      );
+    }
+    return rows[0];
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getAllRequestWithSSS = async () => {
+  try {
+    var con = await mysql.createConnection(databaseInfo);
+
+    var [rows, fields] = await con.query("SELECT * FROM Request INNER JOIN StudentSupportStaff ON Request.sss_ID=StudentSupportStaff.sss_ID");
+    return rows;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const getAllStudentRequestForAcademicStaff = async (academicStaffID) => {
   try {
     var con = await mysql.createConnection(databaseInfo);
 
@@ -88,6 +135,20 @@ const getAllRequestForAcademicStaff = async (academicStaffID) => {
     console.log(err);
   }
 };
+
+const getAllSSSRequestForAcademicStaff = async (academicStaffID) => {
+  try {
+    var con = await mysql.createConnection(databaseInfo);
+
+    var [rows, fields] = await con.query(
+      "SELECT *, DATE_FORMAT(r_duedate, '%d/%m/%Y') AS r_duedate FROM Request INNER JOIN StudentSupportStaff sss ON Request.sss_id=sss.sss_id INNER JOIN Sam ON Request.sam_id=Sam.sam_id WHERE as_ID = '" + academicStaffID + "' AND r_status = 'Assigned Request'" 
+    );
+    return rows;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const getAllSAM = async () => {
   try {
     var con = await mysql.createConnection(databaseInfo);
@@ -99,17 +160,7 @@ const getAllSAM = async () => {
   }
 }
 
-const getRequest = async (requestNo) => {
-  try {
-    var con = await mysql.createConnection(databaseInfo);
 
-    var [rows, fields] = await con.query(
-      "SELECT * FROM Request INNER JOIN Student ON Request.s_id=Student.s_id WHERE r_NO = '" + requestNo + "';");
-    return rows[0];
-  } catch (err) {
-    console.log(err);
-  }
-}
 
 const getAllAcademicStaff = async () => {
   try {
@@ -273,10 +324,13 @@ module.exports = {
   findStudentSupportStaff,
   findSAM,
   findAcademicStaff,
+  findRequest,
+  getRequestWithRequestNo,
   getAllSAM,
   getAllRequestWithStudent,
-  getAllRequestForAcademicStaff,
-  getRequest,
+  getAllStudentRequestForAcademicStaff,
+  getAllSSSRequestForAcademicStaff,
+  getAllRequestWithSSS,
   getAllAcademicStaff,
   insertStudentSupportStaffRequest,
   insertStudentRequest,
