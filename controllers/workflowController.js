@@ -60,6 +60,7 @@ const newRequestEmailToSAM = async (requestorID, requestorType, requestType, req
 const rejectRequest = async (data) => {
   try {
     await databaseController.setRequestStatus(data.requestNo, "Rejected Request");
+    await databaseController.setRequestComments(data.requestNo, data.comment);
     var subject = "The request " + data.requestNo + " has been rejected";
     var student = await databaseController.findStudent(data.studentID);
     var content = `<p>Greetings ${data.studentName}, ${data.studentID} </p>
@@ -155,6 +156,23 @@ try {
   }
 }
 
+const rejectedRequestReapproval = async (data) => {
+  try {
+    await databaseController.setRequestStatus(data.requestNo, "Approved Request");
+    var subject = "The request " + data.requestNo + " has been Reapproved";
+    var student = await databaseController.findStudent(data.studentID);
+    var content = `<p>Greetings ${data.studentName}, ${data.studentID} </p>
+      <br>
+      <p>After consideration, the request that you have submitted ${data.requestNo}, ${data.requestType} has been reapproved.</p>
+      <br>
+      <p>Regards,<p>
+      <p>System Auto-Generated Message<p>`;
+    mailController.sendEmail(subject, student.s_email, content);
+  } catch(err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   newStudentRequestToDatabase,
   newSSSRequestToDatabase,
@@ -164,4 +182,5 @@ module.exports = {
   requestMoreInfo,
   approveAssignedRequest,
   finalApprovalRequest,
+  rejectedRequestReapproval,
 };

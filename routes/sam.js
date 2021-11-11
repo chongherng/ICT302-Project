@@ -25,7 +25,7 @@ router.get("/:id/request/new/:requestNo", checkAuthenticated, async (req, res) =
   }
 })
 
-// Approved request page
+// Approved request page (full view)
 router.get("/:id/request/approved/:requestNo", checkAuthenticated, async (req, res) => {
   if(await validationController.validateRequestFormLink(req.params.requestNo, "Approved Request")){
     res.render("approved-requests.ejs");
@@ -34,14 +34,32 @@ router.get("/:id/request/approved/:requestNo", checkAuthenticated, async (req, r
   }
 })
 
-// Rejected request page
+// Rejected request page (full view)
+router.get("/:id/request/rejected/full", checkAuthenticated, async (req, res) => {
+  var requestList = await databaseController.getAllRequestWithStudent(req.params.requestNo);
+  res.render("rejected-requests.ejs", { staff: req.user, requestData: requestList});
+})
+
+// Rejected request page (single)
 router.get("/:id/request/rejected/:requestNo", checkAuthenticated, async (req, res) => {
   if(await validationController.validateRequestFormLink(req.params.requestNo, "Rejected Request")) {
-    res.render("rejected-requests.ejs");
+    var request = await databaseController.getRequest(req.params.requestNo);
+    res.render("rejected-requests-edit.ejs", { staff: req.user, requestData: request});
   }else {
     res.status(410).send("The request does not exists");
   }
 })
+
+// Rejected request page edit
+router.post("/:id/request/rejected/:requestNo/edit", checkAuthenticated, upload.none(), async (req, res) => {
+  if(await validationController.validateRequestFormLink(req.params.requestNo, "Rejected Request")) {
+    await workflowController.rejectedRequestReapproval(req.body, req.user);
+    res.redirect("/sam/" + req.user.sam_ID);
+  }else {
+    res.status(410).send("The request does not exists");
+  }
+})
+
 
 // Partial request page
 router.get("/:id/request/partial/:requestNo", checkAuthenticated, async (req, res) => {
@@ -83,7 +101,7 @@ router.post("/:id/request/partial/:requestNo/submit", checkAuthenticated, upload
   var isValidated = await validationController.validatePartialRequestForm(req.body);
   if(isValidated) {
     if(req.body.action == "Approve"){
-      await workflowController.finalApprovalRequest(req.body, req.user);
+      await workflowController.finalApprovalRequest(req.body);
     } 
     if(req.body.action == "Reject"){
       await workflowController.rejectRequest(req.body);

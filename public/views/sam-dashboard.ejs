@@ -145,7 +145,7 @@
                             <tbody>
                                 <% requestData.forEach((request) => { %>
                                     <% if(request.r_status == "Rejected Request") { %>
-                                        <tr data-href="/sam/<%= staff.sam_ID %>/request/rejected/<%= request.r_NO %>" class="clickable"> 
+                                        <tr data-href="/sam/<%= staff.sam_ID %>/request/rejected/full" class="clickable"> 
                                             <td><%= request.r_NO %></td>
                                             <td><%= request.s_ID %></td>
                                             <td><%= request.s_fname + " " + request.s_lname %></td>

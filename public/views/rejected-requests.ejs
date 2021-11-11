@@ -15,7 +15,7 @@
     <div id="dashboard-container">
         <nav role="navigation" class="flex-container">
             <div class="nav-left">
-                <a href="#">
+                <a href="/">
                     <img src="/img/Murdoch_logo-Pink.jpg" width="150px" style="display:inline-block">
                 </a>
             </div>
@@ -26,9 +26,11 @@
                     <span></span>
                     <span></span>
                     <ul id="menu">
-                        <li><p class="nav-name">John Doe</p><p class="nav-title">Senior Administration</p></li>
+                        <li><p class="nav-name"><%= staff.sam_fname + " " + staff.sam_lname %></p><p class="nav-title">Senior Administration</p></li>
                         <img class="float-left" src="/img/Logout-White.png" width="29px">
-                        <a class="float-left logout-btn" href="#"><li>Logout</li></a>
+                        <form action="/staff/logout?_method=DELETE" method="POST">
+                            <button class="float-left logout-btn" href="logout">Logout</button>
+                        </form>
                         <div class="clear-float"></div>
                     </ul>
                 </div>
@@ -53,158 +55,18 @@
                                 <th>Selection</th>
                             </thead>
                             <tbody class="academic-tbody">
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src=/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
-                                <tr>
-                                    <td>ME423239</td>
-                                    <td>3342329</td>
-                                    <td>John Doe</td>
-                                    <td>Medical Excuse</td>
-                                    <td>19/10/2021</td>
-                                    <td><a href="#"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
-                                </tr>
+                                <% requestData.forEach((request) => { %>
+                                    <% if(request.r_status == "Rejected Request") { %>
+                                        <tr> 
+                                            <td><%= request.r_NO %></td>
+                                            <td><%= request.s_ID %></td>
+                                            <td><%= request.s_fname + " " + request.s_lname %></td>
+                                            <td><%= request.r_type %></td>
+                                            <td><%= request.r_comments %></td>
+                                            <td><a href="/sam/<%= staff.sam_ID %>/request/rejected/<%= request.r_NO %>"><img src="/img/pencil.png" style="width:21px;height:21px;"></a></td>
+                                        </tr>
+                                    <% } %>
+                                <% }); %>
                             </tbody>
                         </table>
                     </div>
