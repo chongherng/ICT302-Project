@@ -30,7 +30,6 @@ app.use(methodOverride("_method"));
 
 // View engine setup
 app.set("view engine", "ejs");
-//app.use(logger); // Comment out this logger if needed
 
 app.set("views", path.join(__dirname, "/public/views"));
 app.use(express.static(__dirname + "/public"));
@@ -41,26 +40,6 @@ app.use("/staff", staff);
 app.use("/sam", sam);
 app.use("/academic-staff", academicStaff);
 
-function logger(req, res, next) {
-  console.log("Request for " + req.originalUrl);
-  next();
-}
-
-// use this middleware to make sure only authenticated users are allowed to view the page
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/staff/login");
-}
-
-// use this middleware to make sure authenticated users are not allowed to view certain page
-function checkNotAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.redirect("/");
-  }
-  next();
-}
 
 // email notifcation scheduler
 // runs every midnight 12:00 am
