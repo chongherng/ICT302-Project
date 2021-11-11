@@ -4,6 +4,8 @@ const path = require("path");
 const flash = require("express-flash");
 const session = require("express-session");
 const methodOverride = require("method-override");
+const cron = require('node-cron');
+const workflowController = require('../ICT302-Project/controllers/workflowController');
 
 const home = require("./routes/home");
 const request = require("./routes/request");
@@ -59,5 +61,12 @@ function checkNotAuthenticated(req, res, next) {
   }
   next();
 }
+
+// email notifcation scheduler
+// runs every midnight 12:00 am
+cron.schedule('0 0 0 * * *', () => {
+  workflowController.notify48hrs();
+  workflowController.notify24hrs();
+});
 
 app.listen(3000, () => console.log("Server started..."));

@@ -149,6 +149,19 @@ const getAllSSSRequestForAcademicStaff = async (academicStaffID) => {
   }
 };
 
+const getAllAssignedRequest = async () => {
+  try {
+    var con = await mysql.createConnection(databaseInfo);
+
+    var [rows, fields] = await con.query(
+      "SELECT * FROM Request INNER JOIN AcademicStaff ON request.as_id = academicstaff.as_id INNER join sam ON request.sam_id=sam.sam_id where r_status = 'Assigned Request'"
+    );
+    return rows;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 const getAllSAM = async () => {
   try {
     var con = await mysql.createConnection(databaseInfo);
@@ -332,6 +345,7 @@ module.exports = {
   getAllSSSRequestForAcademicStaff,
   getAllRequestWithSSS,
   getAllAcademicStaff,
+  getAllAssignedRequest,
   insertStudentSupportStaffRequest,
   insertStudentRequest,
   setRequestStatus,

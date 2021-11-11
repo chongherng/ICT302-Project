@@ -12,6 +12,7 @@ const upload = multer({ dest: "" });
 router.get("/:id", checkAuthenticated, async (req, res) => {
   var studentRequestList = await databaseController.getAllRequestWithStudent();
   var sssRequestList = await databaseController.getAllRequestWithSSS();
+  var requestList = await databaseController.getAllAssignedRequest();
   res.render("sam-dashboard.ejs", { staff: req.user , studentRequestData : studentRequestList, sssRequestData: sssRequestList });
 });
 

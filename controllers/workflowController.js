@@ -199,6 +199,50 @@ const approvedRequestRejection = async (data) => {
   }
 }
 
+const notify48hrs = async () => {
+  var requestList = await databaseController.getAllAssignedRequest();
+  if(requestList != null) {
+    requestList.forEach((request) => {
+      if((request.r_duedate - Date.now()) / 86400000 > 1 && (request.r_duedate - Date.now()) / 86400000 <= 2){
+        academicStaffName = request.as_fname + " " + request.as_lname;
+        var subject = "Reminder: 48 Hrs Left ";
+        var content = `<p>Greetings ${academicStaffName}</p>
+          <br>
+          <p>You have a request waiting for your approval that is due in 48 hrs</p>
+          <br>
+          <p>Click on this link to view the request.</p>
+          <a href="http://localhost:3000/academic-staff/${request.as_ID}/request/assigned/${request.r_NO}">link</a>
+          <br>
+          <p>Regards,<p>
+          <p>System Auto-Generated Message<p>`;
+        mailController.sendEmail(subject, request.as_email, content);
+      }
+    })
+  }
+}
+
+const notify24hrs = async () => {
+var requestList = await databaseController.getAllAssignedRequest();
+  if(requestList != null) {
+    requestList.forEach((request) => {
+      if((request.r_duedate - Date.now()) / 86400000 > 0 && (request.r_duedate - Date.now()) / 86400000 <= 1){
+        academicStaffName = request.as_fname + " " + request.as_lname;
+        var subject = "Reminder: 24 Hrs Left ";
+        var content = `<p>Greetings ${academicStaffName}</p>
+          <br>
+          <p>You have a request waiting for your approval that is due in 24 hrs</p>
+          <br>
+          <p>Click on this link to view the request.</p>
+          <a href="http://localhost:3000/academic-staff/${request.as_ID}/request/assigned/${request.r_NO}">link</a>
+          <br>
+          <p>Regards,<p>
+          <p>System Auto-Generated Message<p>`;
+        mailController.sendEmail(subject, request.as_email, content);
+      }
+    })
+  }
+}
+
 module.exports = {
   newStudentRequestToDatabase,
   newSSSRequestToDatabase,
@@ -210,4 +254,6 @@ module.exports = {
   finalApprovalRequest,
   rejectedRequestReapproval,
   approvedRequestRejection,
+  notify48hrs,
+  notify24hrs,
 };
