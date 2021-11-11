@@ -74,9 +74,25 @@ const rejectRequest = async (data) => {
   }
 }
 
+const finalApprovalRequest = async (data) => {
+  try {
+    await databaseController.setRequestStatus(data.requestNo, "Approved Request");
+    var subject = "The request " + data.requestNo + " has been approved";
+    var student = await databaseController.findStudent(data.studentID);
+    var content = `<p>Greetings ${data.studentName}, ${data.studentID} </p>
+      <br>
+      <p>The request that you have submitted ${data.requestNo}, ${data.requestType} has been approved.</p>
+      <br>
+      <p>Regards,<p>
+      <p>System Auto-Generated Message<p>`;
+    mailController.sendEmail(subject, student.s_email, content);
+  } catch(err) {
+    console.log(err);
+  }
+}
+
 const assignNewRequest = async (data, SAM) => {
   try {
-    console.log(data);
     await databaseController.setRequestStatus(data.requestNo, "Assigned Request");
     await databaseController.setSamIDOnRequest(data.requestNo, SAM.sam_ID);
     await databaseController.setAcademicStaffOnRequest(data.requestNo, data.selectedAcademicStaff);
@@ -147,4 +163,5 @@ module.exports = {
   rejectRequest,
   requestMoreInfo,
   approveAssignedRequest,
+  finalApprovalRequest,
 };

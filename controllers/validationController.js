@@ -68,10 +68,19 @@ const validateAssignedRequestForm = async (data) => {
   return true;
 }
 
+const validatePartialRequestForm = async (data) => {
+  // validate request number
+  if(await databaseController.getRequest(data.requestNo) == null){
+    return false;
+  }
+  return true;
+}
+
 module.exports = {
   validateStudentForm,
   validateSSSForm,
   validateNewRequestForm,
   validateAssignedRequestForm,
   validateRequestFormLink,
+  validatePartialRequestForm,
 };

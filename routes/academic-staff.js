@@ -17,7 +17,6 @@ router.get("/:id", checkAuthenticated, async (req, res) => {
 router.get("/:id/request/assigned/:requestNo", checkAuthenticated, async (req, res) => {
   if(await validationController.validateRequestFormLink(req.params.requestNo, "Assigned Request")) {
     var request = await databaseController.getRequest(req.params.requestNo);
-    console.log(request.r_duedate)
     res.render("assigned-requests.ejs", { staff: req.user, requestData: request})
   } else {
     res.status(410).send("The request does not exists");
@@ -28,7 +27,7 @@ router.get("/download/upload/:filename", checkAuthenticated, async (req, res) =>
   res.download(path.join(__dirname , "../uploads/" + req.params.filename));
 })
 
-router.post("/submit", checkAuthenticated, upload.none(), async (req, res) => {
+router.post("/:id/request/assigned/:requestNo/submit", checkAuthenticated, upload.none(), async (req, res) => {
   var isValidated = await validationController.validateAssignedRequestForm(req.body);
   if (isValidated) {
     if (req.body.action == "Approve") {

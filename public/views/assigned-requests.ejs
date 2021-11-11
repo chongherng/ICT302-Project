@@ -65,7 +65,7 @@
                     </a>
                 </div>
             </div>
-            <form name="assigned-request" action="/academic-staff/submit" id="assigned-requests-form" method="POST" enctype="multipart/form-data">
+            <form name="assigned-request" action="/academic-staff/<%= staff.as_ID %>/request/assigned/<%= requestData.r_NO %>/submit" id="assigned-requests-form" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="requestNo" value="<%= requestData.r_NO%>">
                 <input type="hidden" name="requestType" value="<%= requestData.r_type%>">
                 <input type="hidden" name="studentName" value="<%= requestData.s_fname + " " + requestData.s_lname %>">
