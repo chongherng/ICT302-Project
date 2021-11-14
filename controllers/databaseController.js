@@ -327,6 +327,14 @@ const getRequestPrefix = (requestType) => {
       return "SP";
     case "Unit Exemption":
       return "UE";
+    case "Request to drop a unit":
+      return "DU"
+    case "Request for 3rd attempt":
+      return "RA";
+    case "Request for 4th attempt":
+      return "RA";
+    case "Others":
+      return "OT";
     default:
       break;
   }
