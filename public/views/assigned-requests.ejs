@@ -46,7 +46,7 @@
             <div class="new-requests-top-content">
                 <p><%= requestData.r_type %></p>
                 <p><%= requestData.r_NO%></p>
-                <p>Dscription of Requests</p>
+                <p>Description of Requests</p>
                 <p><%= requestData.r_description %></p>
                 <div class="new-req-student-id float-left">
                     <p>Requestor ID</p>
@@ -72,16 +72,34 @@
                 <input type="hidden" name="requestorName" value="<%= requestData.s_fname ? (requestData.s_fname + " " + requestData.s_lname) : (requestData.sss_fname + " " + requestData.sss_lname) %> ">
                 <input type="hidden" name="requestorID" value="<%= requestData.s_ID ? requestData.s_ID : requestData.sss_ID %>">
                 <br>
-                <textarea class="comment" placeholder="Comments" name="comment"></textarea><br>
+                <textarea class="comment" placeholder="Comments" name="comment" id="commentbox"></textarea><br>
                 <br>
                 <input class="assign-btn" type="submit" name="action" value="Approve">
                 <input class="reject-btn" type="submit" name="action" value="Reject">
-                <input class="more-info-btn" type="submit" name="action" value="Request More Info">
+                <input class="more-info-btn" type="submit" name="action" value="Request More Info" onclick="return Validate2()">
               </form>
+              <p id = "errormsg" style =
+              "color:red; font-size: 20px; font-weight: bold;">
+          </p>
         </div>
     </div>
 </body>
 <script>
+  function trimfield(str) 
+{ 
+    return str.replace(/^\s+|\s+$/g,''); 
+}
+  function Validate2(){
+      var down = document.getElementById('errormsg');
+      var commentbox=document.getElementById("commentbox")
+      if (trimfield(commentbox.value) == "") {
+             down.innerHTML = "Please input comments";
+            return false;
+        }
+      
+        return true;
+    }
+
   var x, i, j, l, ll, selElmnt, a, b, c;
   /*look for any elements with the class "custom-select":*/
   x = document.getElementsByClassName("custom-select");
