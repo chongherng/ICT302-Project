@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../script/script.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
+    <script src="/script/script.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600;700&display=swap" rel="stylesheet">
@@ -21,6 +21,11 @@
         <h1 class="landing-title">Murdoch University</h1>
         <h2 class="landing-sub-title">Student Request Portal</h2>
       </div>
+      <% if(typeof(message) != "undefined") { %>
+        <% if(message) { %>
+          <div><%= message %></div>
+        <% }%>
+      <% }%>
       <div class="support-staff-container">
         <form action="/request/student/submit" id="Student_Support_Staff_Request_Form" method="POST" enctype="multipart/form-data" onsubmit="return valdidatecheck()">
             <label class="StudentID" for="StudentID"></label><br>

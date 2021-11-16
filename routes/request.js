@@ -27,12 +27,12 @@ const upload = multer({ storage: storage, limits: {
 
 // Get SSS request portal
 router.get("/student-support-staff", (req, res) => {
-  res.sendFile(path.join(__dirname,"../public/views/student-support-staff-request-portal.html"));
+  res.render("student-support-staff-request-portal.ejs");
 });
 
 // Get Student request portal
 router.get("/student", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/views/student-request-portal.html"));
+  res.render("student-request-portal.ejs");
 });
 
 router.get("/completed", (req, res) => {
@@ -49,7 +49,7 @@ router.post("/student-support-staff/submit", upload.single('file'), async (req, 
       return res.redirect("/request/completed");
     } catch {}
   }
-  return res.sendStatus(400);
+  res.render("student-support-staff-request-portal.ejs", { message : "Student Support Staff ID does not exists"});
 });
 
 // Get Student form data
@@ -62,7 +62,7 @@ router.post("/student/submit", upload.single('file'), async (req, res) => {
       return res.redirect("/request/completed");
     } catch {}
   }
-  res.sendStatus(400);
+  res.render("student-request-portal.ejs", { message : "Student ID does not exists"});
 });
 
 module.exports = router;
