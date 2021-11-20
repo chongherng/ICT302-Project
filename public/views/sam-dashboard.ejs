@@ -42,7 +42,7 @@
                 <div class="new-requests-container float-left">
                     <div class="dashboard-titles">
                         <img src="/img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
-                        <p> Total New Requests Chart</p>
+                        <p> Total New And Partial Requests</p>
                     </div>
                     <div class="clear-float"></div>
                     <div class= outer-table>
@@ -145,7 +145,7 @@
                 <div class="new-requests-container float-left">
                     <div class="dashboard-titles">
                         <img src="/img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
-                        <p>Total Partial Requests Chart</p>
+                        <p>Total Approved And Rejected Requests</p>
                     </div>
                     <div class="clear-float"></div>
                     <div class= outer-table>
@@ -247,183 +247,51 @@
     </div>
 </body>
 <script>
-    // Chart 1
-    let myChart = document.getElementById('myChart').getContext('2d');
-    let day1 = new Date(),
-    day2 = new Date(),
-    day3 = new Date(),
-    day4 = new Date(),
-    day5 = new Date(),
-    day6 = new Date(),
-    day7 = new Date(),
-    day8 = new Date();
+    // Pie Chart 1 
+let ctx = document.getElementById('myChart').getContext('2d');
+let labels = ['New Requests','Partial Requests'];
+let colorHex =['#FF6384','#FFCE56'];
 
-    day1.setDate(day1.getDate() - 7); // set to 'now' minus 7 days.
-    day1.setHours(0, 0, 0, 0); // set to midnight.
-    day2.setDate(day2.getDate() - 6); // set to 'now' minus 7 days.
-    day2.setHours(0, 0, 0, 0); // set to midnight.
-    day3.setDate(day3.getDate() - 5); // set to 'now' minus 7 days.
-    day3.setHours(0, 0, 0, 0); // set to midnight.
-    day4.setDate(day4.getDate() - 4); // set to 'now' minus 7 days.
-    day4.setHours(0, 0, 0, 0); // set to midnight.
-    day5.setDate(day5.getDate() - 3); // set to 'now' minus 7 days.
-    day5.setHours(0, 0, 0, 0); // set to midnight.
-    day6.setDate(day6.getDate() - 2); // set to 'now' minus 7 days.
-    day6.setHours(0, 0, 0, 0); // set to midnight.
-    day7.setDate(day7.getDate() - 1); // set to 'now' minus 7 days.
-    day7.setHours(0, 0, 0, 0); // set to midnight.
-    
-    let massPopChart = new Chart(myChart, {
-        type:'bar', // bar,horizontalBar, pie, line ,doughtnut, radar, polarArea
-        data:{
-            datasets:[{
-                label:'Total New Requests',
-                data:[
-                    {x: day1, y:20},
-                    {x: day2, y:20},
-                    {x: day3, y:40},
-                    {x: day4, y:60},
-                    {x: day5, y:80},
-                    {x: day6, y:100},
-                    {x: day7, y:100},
-                    {x: day8, y:100},
-                ],
-                backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-            }],
-        },
-        options:{
-            title:{
+let myChart = new Chart(ctx,{
+    type:'pie',
+    data: {
+        datasets: [{
+            data:[30,30],
+            backgroundColor:colorHex
+        }],
+        labels:labels
+    },
+    options:{
+        title:{
                 display:true,
-                text:'Total New Requests'
+                text:'Total New And Partial Requests'
             },
-            scales: {
-                xAxes:[{
-                    gridLines:{
-                        display:false
-                    },
-                    type:'time',
-                    time:{
-                        min:day1,
-                        max:day7,
-                        unit:'day'
-                    }
-                }],
-                yAxes:[{
-                    gridLines:{
-                        display:true
-                    },
-                    ticks:{
-                        beginAtZero: true
-                    }
-                }]
-            }
-        } // Object
-    });
+        responsive:true
+    }
+})
 
-    // Chart 2
-    let myChart2 = document.getElementById('myChart2').getContext('2d');
-    let myChart2day1 = new Date(),
-    myChart2day2 = new Date(),
-    myChart2day3 = new Date(),
-    myChart2day4 = new Date(),
-    myChart2day5 = new Date(),
-    myChart2day6 = new Date(),
-    myChart2day7 = new Date(),
-    myChart2day8 = new Date();
+// Pie Chart 2
+let ctx2 = document.getElementById('myChart2').getContext('2d');
+let labels2 = ['Approved Requests','Rejected Requests'];
+let colorHex2 =['#FF6384','#FFCE56'];
 
-    myChart2day1.setDate(myChart2day1.getDate() - 7); // set to 'now' minus 7 days.
-    myChart2day1.setHours(0, 0, 0, 0); // set to midnight.
-    myChart2day2.setDate(myChart2day2.getDate() - 6); // set to 'now' minus 7 days.
-    myChart2day2.setHours(0, 0, 0, 0); // set to midnight.
-    myChart2day3.setDate(myChart2day3.getDate() - 5); // set to 'now' minus 7 days.
-    myChart2day3.setHours(0, 0, 0, 0); // set to midnight.
-    myChart2day4.setDate(myChart2day4.getDate() - 4); // set to 'now' minus 7 days.
-    myChart2day4.setHours(0, 0, 0, 0); // set to midnight.
-    myChart2day5.setDate(myChart2day5.getDate() - 3); // set to 'now' minus 7 days.
-    myChart2day5.setHours(0, 0, 0, 0); // set to midnight.
-    myChart2day6.setDate(myChart2day6.getDate() - 2); // set to 'now' minus 7 days.
-    myChart2day6.setHours(0, 0, 0, 0); // set to midnight.
-    myChart2day7.setDate(myChart2day7.getDate() - 1); // set to 'now' minus 7 days.
-    myChart2day7.setHours(0, 0, 0, 0); // set to midnight.
-    
-    let massPopChart2 = new Chart(myChart2, {
-        type:'bar', // bar,horizontalBar, pie, line ,doughtnut, radar, polarArea
-        data:{
-            datasets:[{
-                label:'Total Partial Requests',
-                data:[
-                    {x: myChart2day1, y:20},
-                    {x: myChart2day2, y:20},
-                    {x: myChart2day3, y:40},
-                    {x: myChart2day4, y:60},
-                    {x: myChart2day5, y:80},
-                    {x: myChart2day6, y:100},
-                    {x: myChart2day7, y:100},
-                    {x: myChart2day8, y:100},
-                ],
-                backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-            }],
-        },
-        options:{
-            title:{
+let myChart2 = new Chart(ctx2,{
+    type:'pie',
+    data: {
+        datasets: [{
+            data:[30,30],
+            backgroundColor:colorHex2
+        }],
+        labels:labels2
+    },
+    options:{
+        title:{
                 display:true,
-                text:'Total Partial Requests'
+                text:'Total Approved And Rejected Requests'
             },
-            scales: {
-                xAxes:[{
-                    gridLines:{
-                        display:false
-                    },
-                    type:'time',
-                    time:{
-                        min:myChart2day1,
-                        max:myChart2day7,
-                        unit:'day'
-                    }
-                }],
-                yAxes:[{
-                    gridLines:{
-                        display:true
-                    },
-                    ticks:{
-                        beginAtZero: true
-                    }
-                }]
-            }
-        } // Object
-    });
+        responsive:true
+    }
+})
 document.addEventListener("DOMContentLoaded", () => {
     const rows = document.querySelectorAll("tr[data-href]");
     rows.forEach(row => {
