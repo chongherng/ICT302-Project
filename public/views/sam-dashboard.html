@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
     <title>SAM Dashboard</title>
 </head>
 <body class="dashboard-bg">
@@ -36,6 +37,19 @@
         </nav>
         <div class="sam-dashboard-body">
             <div class="sam-dashboard-top-content">
+                <div class="new-requests-container float-left">
+                    <div class="dashboard-titles">
+                        <img src="../img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
+                        <p> Total New Requests Chart</p>
+                    </div>
+                    <div class="clear-float"></div>
+                    <div class= outer-table>
+                        <div class="pie-graph-container">
+                            <canvas id="myChart" style="width:px;">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
                 <div class="new-requests-container float-left">
                     <div class="dashboard-titles">
                         <img src="../img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
@@ -207,7 +221,19 @@
                 <div class="clear-float"></div>
             </div>
             <div class="sam-dashboard-btm-content">
-                
+                <div class="new-requests-container float-left">
+                    <div class="dashboard-titles">
+                        <img src="../img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
+                        <p>Total Partial Requests Chart</p>
+                    </div>
+                    <div class="clear-float"></div>
+                    <div class= outer-table>
+                        <div class="pie-graph-container">
+                            <canvas id="myChart2" style="width:450px;">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
                 <div class="partial-requests-container float-left">
                     <div class="dashboard-titles">
                         <img src="../img/Chart-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
@@ -381,6 +407,51 @@
     </div>
 </body>
 <script>
+// Pie Chart 1 
+let ctx = document.getElementById('myChart').getContext('2d');
+let labels = ['New Requests','Partial Requests'];
+let colorHex =['#FF6384','#FFCE56'];
+
+let myChart = new Chart(ctx,{
+    type:'pie',
+    data: {
+        datasets: [{
+            data:[30,30],
+            backgroundColor:colorHex
+        }],
+        labels:labels
+    },
+    options:{
+        title:{
+                display:true,
+                text:'Total New And Partial Requests'
+            },
+        responsive:true
+    }
+})
+
+// Pie Chart 2
+let ctx2 = document.getElementById('myChart2').getContext('2d');
+let labels2 = ['New Requests','Partial Requests'];
+let colorHex2 =['#FF6384','#FFCE56'];
+
+let myChart2 = new Chart(ctx2,{
+    type:'pie',
+    data: {
+        datasets: [{
+            data:[30,30],
+            backgroundColor:colorHex2
+        }],
+        labels:labels2
+    },
+    options:{
+        title:{
+                display:true,
+                text:'Total New And Partial Requests'
+            },
+        responsive:true
+    }
+})
   var x, i, j, l, ll, selElmnt, a, b, c;
   /*look for any elements with the class "custom-select":*/
   x = document.getElementsByClassName("custom-select");
