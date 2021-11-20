@@ -182,6 +182,57 @@ const getTotalRejectedRequest = async (studentRequestList, sssRequestList) => {
   return totalRejectedRequest;
 }
 
+const getUpcomingDueDateRequest = async (as_ID) => {
+  var day1 = 0;
+  var day2 = 0;
+  var day3 = 0;
+  var day4 = 0;
+  var day5 = 0;
+  var day6 = 0;
+  var day7 = 0;
+  var dayDiff;
+  var requestList = await databaseController.getAllAssignedRequest();
+  if (requestList != null) {
+    requestList.forEach((request) => {
+      if (request.as_ID == as_ID) {
+        dayDiff = (request.r_duedate - Date.now()) / 86400000;
+        if (dayDiff > 0 && dayDiff <= 1) {
+          day1++;
+        }
+        if (dayDiff > 1 && dayDiff <= 2) {
+          day2++;
+        }
+        if (dayDiff > 2 && dayDiff <= 3) {
+          day3++;
+        }
+        if (dayDiff > 3 && dayDiff <= 4) {
+          day4++;
+        }
+        if (dayDiff > 4 && dayDiff <= 5) {
+          day5++;
+        }
+        if (dayDiff > 5 && dayDiff <= 6) {
+          day6++;
+        }
+        if (dayDiff > 6 && dayDiff <= 7) {
+          day7++;
+        }
+      }
+    });
+  }
+  var dueDateObject = {
+    day1 : day1,
+    day2 : day2,
+    day3 : day3,
+    day4 : day4,
+    day5 : day5,
+    day6 : day6,
+    day7 : day7,
+  }
+
+  return dueDateObject;
+}
+
 const assignNewRequest = async (data, SAM) => {
   try {
     await databaseController.setRequestStatus(data.requestNo, "Assigned Request");
@@ -347,4 +398,5 @@ module.exports = {
   getTotalPartialRequest,
   getTotalRejectedRequest,
   getTotalApprovedRequest,
+  getUpcomingDueDateRequest,
 };

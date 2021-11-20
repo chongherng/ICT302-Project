@@ -42,7 +42,7 @@
               <div class="new-requests-container float-left">
                 <div class="dashboard-titles">
                     <img src="/img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
-                    <p>Total Assigned Requests Chart</p>
+                    <p>Upcoming Request Due Date Chart</p>
                 </div>
                 <div class="clear-float"></div>
                 <div class= outer-table>
@@ -117,35 +117,34 @@
     myChart2day7 = new Date(),
     myChart2day8 = new Date();
 
-    myChart2day1.setDate(myChart2day1.getDate() - 7); // set to 'now' minus 7 days.
+    myChart2day1.setDate(myChart2day1.getDate()); // set to 'now'.
     myChart2day1.setHours(0, 0, 0, 0); // set to midnight.
-    myChart2day2.setDate(myChart2day2.getDate() - 6); // set to 'now' minus 7 days.
+    myChart2day2.setDate(myChart2day2.getDate() + 1); // set to 'now' plus 1 days.
     myChart2day2.setHours(0, 0, 0, 0); // set to midnight.
-    myChart2day3.setDate(myChart2day3.getDate() - 5); // set to 'now' minus 7 days.
+    myChart2day3.setDate(myChart2day3.getDate() + 2); // set to 'now' plus 2 days.
     myChart2day3.setHours(0, 0, 0, 0); // set to midnight.
-    myChart2day4.setDate(myChart2day4.getDate() - 4); // set to 'now' minus 7 days.
+    myChart2day4.setDate(myChart2day4.getDate() + 3); // set to 'now' plus 3 days.
     myChart2day4.setHours(0, 0, 0, 0); // set to midnight.
-    myChart2day5.setDate(myChart2day5.getDate() - 3); // set to 'now' minus 7 days.
+    myChart2day5.setDate(myChart2day5.getDate() + 4); // set to 'now' plus 4 days.
     myChart2day5.setHours(0, 0, 0, 0); // set to midnight.
-    myChart2day6.setDate(myChart2day6.getDate() - 2); // set to 'now' minus 7 days.
+    myChart2day6.setDate(myChart2day6.getDate() + 5); // set to 'now' plus 5 days.
     myChart2day6.setHours(0, 0, 0, 0); // set to midnight.
-    myChart2day7.setDate(myChart2day7.getDate() - 1); // set to 'now' minus 7 days.
+    myChart2day7.setDate(myChart2day7.getDate() + 6); // set to 'now' plus 6 days.
     myChart2day7.setHours(0, 0, 0, 0); // set to midnight.
     
     let massPopChart2 = new Chart(myChart2, {
         type:'bar', // bar,horizontalBar, pie, line ,doughtnut, radar, polarArea
         data:{
             datasets:[{
-                label:'Total Assigned Requests',
+                label:'Total Assigned Requests per Date',
                 data:[
-                    {x: myChart2day1, y:20},
-                    {x: myChart2day2, y:20},
-                    {x: myChart2day3, y:40},
-                    {x: myChart2day4, y:60},
-                    {x: myChart2day5, y:80},
-                    {x: myChart2day6, y:100},
-                    {x: myChart2day7, y:100},
-                    {x: myChart2day8, y:100},
+                    {x: myChart2day1, y:'<%= upcomingDueDateRequest.day1 %>'},
+                    {x: myChart2day2, y:'<%= upcomingDueDateRequest.day2 %>'},
+                    {x: myChart2day3, y:'<%= upcomingDueDateRequest.day3 %>'},
+                    {x: myChart2day4, y:'<%= upcomingDueDateRequest.day4 %>'},
+                    {x: myChart2day5, y:'<%= upcomingDueDateRequest.day5 %>'},
+                    {x: myChart2day6, y:'<%= upcomingDueDateRequest.day6 %>'},
+                    {x: myChart2day7, y:'<%= upcomingDueDateRequest.day7 %>'},
                 ],
                 backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',

@@ -11,7 +11,8 @@ const upload = multer({ dest: "" });
 router.get("/:id", checkAuthenticated, async (req, res) => {
   var studentRequestList = await databaseController.getAllStudentRequestForAcademicStaff(req.user.as_ID);
   var sssRequestList = await databaseController.getAllSSSRequestForAcademicStaff(req.user.as_ID);
-  res.render("academic-staff-dashboard.ejs", { staff: req.user, studentRequestData: studentRequestList, sssRequestData: sssRequestList });
+  var upcomingDueDateRequest = await workflowController.getUpcomingDueDateRequest(req.user.as_ID);
+  res.render("academic-staff-dashboard.ejs", { staff: req.user, studentRequestData: studentRequestList, sssRequestData: sssRequestList, upcomingDueDateRequest : upcomingDueDateRequest });
 });
 
 
