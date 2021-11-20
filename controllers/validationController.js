@@ -3,6 +3,9 @@ const fs = require('fs');
 
 const validateStudentForm = async (data, file) => {
   var student = await databaseController.findStudent(data.StudentID);
+  if(data.requestType == 'Others' && data.otherOption == null) {
+    return false;
+  }
   if (student == null || file == null || data.requestType == null) {
     // delete file if validation fail
     if (file != null) {

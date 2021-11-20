@@ -44,7 +44,11 @@
         </div>
         <div class="new-requests-content">
             <div class="new-requests-top-content">
-                <p><%= requestData.r_type %></p>
+                <% if(requestData.r_type == "Others") {%>
+                    <p><%= requestData.r_type %> - <%= requestData.r_otherType%></p>
+                <% } else { %>
+                  <p><%= requestData.r_type %></p>
+                <% } %>
                 <p><%= requestData.r_NO%></p>
                 <p>Description of Requests</p>
                 <p><%= requestData.r_description %></p>

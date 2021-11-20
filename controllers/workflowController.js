@@ -3,6 +3,12 @@ const mailController = require("../controllers/mailController");
 
 const newStudentRequestToDatabase = async (data, file) => {
   // returns request number
+  var otherOption;
+  if(data.requestType == 'Others') {
+    otherOption = data.otherOption;
+  } else {
+    otherOption = '';
+  }
   return await databaseController.insertStudentRequest(
     data.StudentID,
     data.requestType,
@@ -10,7 +16,7 @@ const newStudentRequestToDatabase = async (data, file) => {
     "/upload/" + file.filename,
     new Date().toISOString().split("T")[0],
     "New Request",
-    ""
+    otherOption
   ); // change last to data.otherType
 };
 
