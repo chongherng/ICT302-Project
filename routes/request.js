@@ -41,28 +41,30 @@ router.get("/completed", (req, res) => {
 
 // Get SSS form data
 router.post("/student-support-staff/submit", upload.single('file'), async (req, res) => {
-  var isValidated = await validateFormController.validateSSSForm(req.body, req.file);
-  if (isValidated) {
-    try {
-      var requestNo = await workFlowController.newSSSRequestToDatabase(req.body, req.file);
-      await workFlowController.newRequestEmailToSAM(req.body.StudentSupportStaffID,"SSS", req.body.requestType, requestNo);
-      return res.redirect("/request/completed");
-    } catch {}
+  try {
+    var isValidated = await validateFormController.validateSSSForm(req.body, req.file);
+    if (isValidated) {
+        var requestNo = await workFlowController.newSSSRequestToDatabase(req.body, req.file);
+        await workFlowController.newRequestEmailToSAM(req.body.StudentSupportStaffID,"SSS", req.body.requestType, requestNo);
+        return res.redirect("/request/completed");
+    }
+  } catch (err) {
+    res.render("student-support-staff-request-portal.ejs", { message : err});
   }
-  res.render("student-support-staff-request-portal.ejs", { message : "Student Support Staff ID does not exists"});
 });
 
 // Get Student form data
 router.post("/student/submit", upload.single('file'), async (req, res) => {
-  var isValidated = await validateFormController.validateStudentForm(req.body, req.file);
-  if(isValidated){
-    try {
+  try {
+    var isValidated = await validateFormController.validateStudentForm(req.body, req.file);
+    if(isValidated){
       var requestNo = await workFlowController.newStudentRequestToDatabase(req.body, req.file);
       await workFlowController.newRequestEmailToSAM(req.body.StudentID,"Student", req.body.requestType, requestNo);
       return res.redirect("/request/completed");
-    } catch {}
+    }
+  } catch (err) {
+    res.render("student-request-portal.ejs", { message : err });
   }
-  res.render("student-request-portal.ejs", { message : "Student ID does not exists"});
 });
 
 module.exports = router;

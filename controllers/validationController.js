@@ -3,8 +3,9 @@ const fs = require('fs');
 
 const validateStudentForm = async (data, file) => {
   var student = await databaseController.findStudent(data.StudentID);
+  var fileExt = file.originalname.split(".").pop();
   if(data.requestType == 'Others' && data.otherOption == null) {
-    return false;
+    throw "Empty other type entered";
   }
   if (student == null || file == null || data.requestType == null) {
     // delete file if validation fail
@@ -13,14 +14,17 @@ const validateStudentForm = async (data, file) => {
             if (err) throw err;
         })
     }
-    return false;
-  } else {
+    throw "Missing entry";
+  } 
+  if(fileExt != "docx" && fileExt != "doc" && fileExt != "pdf") {
+    throw "Invalid file type";
+  } 
     return true;
-  }
 };
 
 const validateSSSForm = async (data, file) => {
   var studentSupportStaff = await databaseController.findStudentSupportStaff(data.StudentSupportStaffID);
+  var fileExt = file.originalname.split(".").pop();
   if (file == null || studentSupportStaff == null || data.requestType == null) {
     // delete file if validation fail
     if(file != null) {
@@ -28,7 +32,10 @@ const validateSSSForm = async (data, file) => {
           if (err) throw err;
         });
     }
-    return false;
+    throw "Missing entry";
+  }
+  if (fileExt != "docx" && fileExt != "doc" && fileExt != "pdf") {
+    throw "Invalid file type";
   }
   return true;
 };
