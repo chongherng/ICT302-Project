@@ -130,8 +130,11 @@
     }
 
 
-  var today = new Date().toISOString().split('T')[0];
-document.getElementsByName("duedate")[0].setAttribute('min', today);
+  var tmr = new Date();
+  tmr.setDate(tmr.getDate() + 1);
+  tmr = tmr.toISOString().split('T')[0];
+  
+document.getElementsByName("duedate")[0].setAttribute('min', tmr);
 
   var x, i, j, l, ll, selElmnt, a, b, c;
   /*look for any elements with the class "custom-select":*/
