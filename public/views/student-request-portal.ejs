@@ -35,8 +35,11 @@
               <option value="Request to drop a unit">Request to drop a unit</option>
               <option value="Request for 3rd attempt">Request for 3rd attempt</option>
               <option value="Request for 4th attempt">Request for 4th attempt</option>
-              <option value="Others">Others</option>
+              <option value="o">Others</option>
             </select>
+            <div id="myinst" style="display:none;">
+              <input type="text" id="otherOption" name="otherOption" placeholder="Input your custom category"/>
+            </div>
             <br>
             <textarea class="comment" placeholder="Comments" name="comment"></textarea><br>
             <!-- our custom upload button -->
@@ -86,6 +89,20 @@
         }
       
 
+  function f1()
+  {
+    // document.write('option changed!');
+    var v=document.getElementById("support-staff-dropdown");
+    var v1=document.getElementById("myinst");
+    if(v.value=="o")
+    {
+        v1.style.display='block';
+    }
+    else
+    {
+        v1.style.display='none';
+    }
+  }
   var x, i, j, l, ll, selElmnt, a, b, c;
   /*look for any elements with the class "custom-select":*/
   x = document.getElementsByClassName("custom-select");

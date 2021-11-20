@@ -61,10 +61,8 @@ li {
   margin: 0;
 }
 
-.landing-buttons-container,
-.staff-login-container,
-.support-staff-container {
-  margin: 102px 0 0 180px;
+.landing-buttons-container, .staff-login-container, .support-staff-container{
+  margin:40px 0 0 180px;
 }
 
 .landing-buttons,
@@ -90,38 +88,26 @@ input[type="submit"]:hover,
   transition: 0.5s;
 }
 
-input[type="text"],
-input[type="password"],
-.support-staff-dropdown,
-.comment {
-  width: 577px;
-  height: 60px;
-  font-size: 20px;
-  background-color: #f4f8f7;
-  border: none;
+input[type=text],input[type=password],.support-staff-dropdown,#support-staff-dropdown,.comment{
+  width:577px;
+  height:60px;
+  font-size:20px;
+  background-color:#f4f8f7;
+  border:none;
   padding: 3px 0px 3px 3px;
   margin: 5px 1px 3px 0px;
   border-radius: 10px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
-#staffID,
-#password,
-#StudentID,
-.support-staff-dropdown,
-.comment,
-select.select-staff-dropdown {
-  padding: 0 20px 0 20px;
+#staffID,#password,#StudentID,.support-staff-dropdown,#support-staff-dropdown,#otherOption,.comment,select.select-staff-dropdown{
+  padding:0 20px 0 20px;
 }
 
-input[type="text"]::placeholder,
-input[type="password"]::placeholder,
-.support-staff-dropdown,
-.comment::placeholder,
-select.select-staff-dropdown::placeholder {
-  font-size: 20px;
-  color: #a3a3a3;
-  font-family: "Source Sans Pro", sans-serif;
+input[type=text]::placeholder, input[type=password]::placeholder, .support-staff-dropdown,#support-staff-dropdown,.comment::placeholder,select.select-staff-dropdown::placeholder{
+  font-size:20px;
+  color:#a3a3a3;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 input[type="text"]:focus,
@@ -140,9 +126,9 @@ input[type="submit"] {
   vertical-align: top;
 }
 
-.support-staff-dropdown {
-  width: 617px;
-  margin-top: 10px;
+.support-staff-dropdown,#support-staff-dropdown{
+  width:617px;
+  margin-top:10px;
 }
 
 textarea.comment {
@@ -152,12 +138,9 @@ textarea.comment {
   resize: none;
 }
 
-select.support-staff-dropdown:focus,
-textarea.comment:focus,
-select.select-staff-dropdown:focus,
-input[type="date"]:focus {
-  outline: none;
-  color: #a3a3a3;
+select.support-staff-dropdown:focus,#support-staff-dropdown:focus,textarea.comment:focus,select.select-staff-dropdown:focus,input[type="date"]:focus{
+  outline:none;
+  color:#a3a3a3;
   box-shadow: 0 0 5px rgba(81, 203, 238, 1);
   border: 1px solid rgba(81, 203, 238, 1);
 }
@@ -185,6 +168,11 @@ label.documentlabel {
   font-size: 160px;
   letter-spacing: 5px;
   font-family: "Bebas Neue", cursive;
+}
+
+.pwderrormsg{
+  color:#c01a35;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 #request-complete-container .right-content .landing-sub-title {
@@ -727,7 +715,6 @@ input[type="date"] {
   margin-left:20px;
 }
 
-/* Charts */
-#myChart2,#myChart{
-  padding-top:40px;
+.hidden {
+  display:none;
 }

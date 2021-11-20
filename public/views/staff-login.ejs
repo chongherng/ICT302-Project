@@ -21,17 +21,17 @@
                 <h1 class="landing-title">Murdoch University</h1>
                 <h2 class="landing-sub-title">Staff Portal</h2>
             </div>
-            <% if(typeof(message) != "undefined") { %>
-            <% if(message) { %>
-            <div><%= message %></div>
-            <% }%>
-            <% }%>
             <div class="staff-login-container">
                 <form method="POST" action="/staff/login" enctype="multipart/form-data">
                     <label class="StaffID" for="StaffID"></label><br>
                     <input type="text" id="staffID" name="staffID" placeholder="Staff ID" ><br>
                     <label class="password" for="password"></label><br>
                     <input type="password" id="password" name="password" placeholder="Password"><br><br>
+                    <% if(typeof(message) != "undefined") { %>
+                        <% if(message) { %>
+                        <div><%= message %></div>
+                        <% }%>
+                        <% }%>
                     <input type="submit" value="Login">
                 </form>
             </div>
