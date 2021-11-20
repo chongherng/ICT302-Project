@@ -142,6 +142,46 @@ const getTotalPartialRequest = async (studentRequestList, sssRequestList) => {
   return totalPartialRequest;
 }
 
+const getTotalApprovedRequest = async (studentRequestList, sssRequestList) => {
+  var totalApprovedRequest = 0;
+  if(studentRequestList != null) {
+    studentRequestList.forEach((request) => {
+      if(request.r_status == "Approved Request") {
+        totalApprovedRequest++;
+      }
+    })
+  }
+  if(sssRequestList != null) {
+    sssRequestList.forEach((request) => {
+      if(request.r_status == "Approved Request") {
+        totalApprovedRequest++;
+      }
+    })
+  }
+
+  return totalApprovedRequest;
+}
+
+const getTotalRejectedRequest = async (studentRequestList, sssRequestList) => {
+  var totalRejectedRequest = 0;
+  if(studentRequestList != null) {
+    studentRequestList.forEach((request) => {
+      if(request.r_status == "Rejected Request") {
+        totalRejectedRequest++;
+      }
+    })
+  }
+  if(sssRequestList != null) {
+    sssRequestList.forEach((request) => {
+      if(request.r_status == "Rejected Request") {
+        totalRejectedRequest++;
+      }
+    })
+  }
+
+  return totalRejectedRequest;
+}
+
 const assignNewRequest = async (data, SAM) => {
   try {
     await databaseController.setRequestStatus(data.requestNo, "Assigned Request");
@@ -305,4 +345,6 @@ module.exports = {
   notify24hrs,
   getTotalNewRequest,
   getTotalPartialRequest,
+  getTotalRejectedRequest,
+  getTotalApprovedRequest,
 };
