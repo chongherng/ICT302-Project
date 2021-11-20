@@ -256,7 +256,7 @@ let myChart = new Chart(ctx,{
     type:'pie',
     data: {
         datasets: [{
-            data:[30,30],
+            data:['<%= totalNewRequest %>','<%= totalPartialRequest %>'],
             backgroundColor:colorHex
         }],
         labels:labels
@@ -279,7 +279,7 @@ let myChart2 = new Chart(ctx2,{
     type:'pie',
     data: {
         datasets: [{
-            data:[30,30],
+            data:['<%= totalApprovedRequest %>','<%= totalRejectedRequest %>'],
             backgroundColor:colorHex2
         }],
         labels:labels2

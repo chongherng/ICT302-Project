@@ -14,7 +14,9 @@ router.get("/:id", checkAuthenticated, async (req, res) => {
   var sssRequestList = await databaseController.getAllRequestWithSSS();
   var totalNewRequest = await workflowController.getTotalNewRequest(studentRequestList, sssRequestList);
   var totalPartialRequest = await workflowController.getTotalPartialRequest(studentRequestList, sssRequestList);
-  res.render("sam-dashboard.ejs", { staff: req.user , studentRequestData : studentRequestList, sssRequestData: sssRequestList, totalNewRequest : totalNewRequest, totalPartialRequest : totalPartialRequest });
+  var totalRejectedRequest = await workflowController.getTotalRejectedRequest(studentRequestList, sssRequestList);
+  var totalApprovedRequest = await workflowController.getTotalApprovedRequest(studentRequestList, sssRequestList);
+  res.render("sam-dashboard.ejs", { staff: req.user , studentRequestData : studentRequestList, sssRequestData: sssRequestList, totalNewRequest : totalNewRequest, totalPartialRequest : totalPartialRequest, totalRejectedRequest : totalRejectedRequest, totalApprovedRequest : totalApprovedRequest });
 });
 
 // New request page
