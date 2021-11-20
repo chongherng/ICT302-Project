@@ -469,6 +469,20 @@ th {
   align-items: center;
 }
 
+.notificationCircle {
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  padding: 7px;
+  margin-left:10px;
+
+  background:#e31f3e;
+  color: #ffffff;
+  text-align: center;
+  font-weight:bold;
+  font: 16px Arial, sans-serif;
+}
+
 /* Academic Staff Dashboard */
 .assigned-requests-container{
   width:1050px;
