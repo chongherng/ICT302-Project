@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../script/script.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
+    <script src="/script/script.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600;700&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
         <nav role="navigation" class="flex-container">
             <div class="nav-left">
                 <a href="/">
-                    <img src="../img/Murdoch_logo-Pink.jpg" width="150px" style="display:inline-block">
+                    <img src="/img/Murdoch_logo-Pink.jpg" width="150px" style="display:inline-block">
                 </a>
             </div>
             <div class="nav-right">
@@ -28,7 +28,7 @@
                     <span></span>
                     <ul id="menu">
                         <li><p class="nav-name"><%= staff.as_fname + " " + staff.as_lname%></p><p class="nav-title">Academic Staff</p></li>
-                        <img class="float-left" src="../img/Logout-White.png" width="29px">
+                        <img class="float-left" src="/img/Logout-White.png" width="29px">
                         <form action="/staff/logout?_method=DELETE" method="POST">
                             <button class="float-left logout-btn" href="logout">Logout</button>
                         </form>
@@ -41,7 +41,7 @@
             <div class="sam-dashboard-top-content">
               <div class="new-requests-container float-left">
                 <div class="dashboard-titles">
-                    <img src="../img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
+                    <img src="/img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
                     <p>Total Assigned Requests Chart</p>
                 </div>
                 <div class="clear-float"></div>
@@ -54,7 +54,7 @@
             </div>
                 <div class="assigned-requests-container float-left">
                     <div class="dashboard-titles">
-                        <img src="../img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
+                        <img src="/img/Form-Grey.png" style="height:20px; width:20px; margin-right:10px; vertical-align:middle">
                         <p>Assigned Requests</p>
                     </div>
                     <div class="clear-float"></div>

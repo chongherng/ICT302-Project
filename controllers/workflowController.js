@@ -1,3 +1,4 @@
+const { request } = require("express");
 const databaseController = require("../controllers/databaseController");
 const mailController = require("../controllers/mailController");
 
@@ -99,6 +100,46 @@ const finalApprovalRequest = async (data) => {
   } catch(err) {
     console.log(err);
   }
+}
+
+const getTotalNewRequest = async (studentRequestList, sssRequestList) => {
+  var totalNewRequest = 0;
+  if(studentRequestList != null) {
+    studentRequestList.forEach((request) => {
+      if(request.r_status == "New Request") {
+        totalNewRequest++;
+      }
+    })
+  }
+  if(sssRequestList != null) {
+    sssRequestList.forEach((request) => {
+      if(request.r_status == "New Request") {
+        totalNewRequest++;
+      }
+    })
+  }
+
+  return totalNewRequest;
+}
+
+const getTotalPartialRequest = async (studentRequestList, sssRequestList) => {
+  var totalPartialRequest = 0;
+  if(studentRequestList != null) {
+    studentRequestList.forEach((request) => {
+      if(request.r_status == "Partial Request") {
+        totalPartialRequest++;
+      }
+    })
+  }
+  if(sssRequestList != null) {
+    sssRequestList.forEach((request) => {
+      if(request.r_status == "Partial Request") {
+        totalPartialRequest++;
+      }
+    })
+  }
+
+  return totalPartialRequest;
 }
 
 const assignNewRequest = async (data, SAM) => {
@@ -262,4 +303,6 @@ module.exports = {
   approvedRequestRejection,
   notify48hrs,
   notify24hrs,
+  getTotalNewRequest,
+  getTotalPartialRequest,
 };
