@@ -732,3 +732,8 @@ input[type="date"] {
 .hidden {
   display:none;
 }
+
+/* Charts */
+#myChart,#myChart2{
+  padding-top:32px;
+}
