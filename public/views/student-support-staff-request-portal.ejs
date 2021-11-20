@@ -21,14 +21,14 @@
         <h1 class="landing-title">Murdoch University</h1>
         <h2 class="landing-sub-title">Student Support Staff Request Portal</h2>
       </div>
-      <% if(typeof(message) != "undefined") { %>
-        <% if(message) { %>
-          <div><%= message %></div>
-        <% }%>
-      <% }%>
       <div class="support-staff-container">
         <form action="/request/student-support-staff/submit" id="Student_Support_Staff_Request_Form" method="POST" enctype="multipart/form-data" onsubmit="return valdidatecheck()">
-            <label class="StudentID" for="StudentID"></label><br>
+          <% if(typeof(message) != "undefined") { %>
+            <% if(message) { %>
+              <div class="pwderrormsg"><%= message %></div>
+            <% }%>
+          <% }%>
+          <label class="StudentID" for="StudentID"></label><br>
             <input type="text" id="StudentID" name="StudentSupportStaffID" placeholder="Student Support Staff ID" required minlength="8" maxlength="8 "><br>
             <select class="support-staff-dropdown" name="requestType" required>
               <option value="" disabled selected>Select Request Category</option>

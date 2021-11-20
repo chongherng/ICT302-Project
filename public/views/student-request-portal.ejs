@@ -21,13 +21,13 @@
         <h1 class="landing-title">Murdoch University</h1>
         <h2 class="landing-sub-title">Student Request Portal</h2>
       </div>
-      <% if(typeof(message) != "undefined") { %>
-        <% if(message) { %>
-          <div><%= message %></div>
-        <% }%>
-      <% }%>
       <div class="support-staff-container">
         <form action="/request/student/submit" id="Student_Support_Staff_Request_Form" method="POST" enctype="multipart/form-data" onsubmit="return valdidatecheck()">
+          <% if(typeof(message) != "undefined") { %>
+            <% if(message) { %>
+              <div class="pwderrormsg"><%= message %></div>
+            <% }%>
+          <% }%>
             <label class="StudentID" for="StudentID"></label><br>
             <input type="text" id="StudentID" name="StudentID" placeholder="Student ID" required minlength="8" maxlength="8 "><br>
             <select id="support-staff-dropdown" name="requestType" onclick="f1()" required>
@@ -97,10 +97,12 @@
     if(v.value=="Others")
     {
         v1.style.display='block';
+        document.getElementById("otherOption").required = true;
     }
     else
     {
         v1.style.display='none';
+        document.getElementById("otherOption").required = false;
     }
   }
   var x, i, j, l, ll, selElmnt, a, b, c;
