@@ -183,19 +183,20 @@ const getTotalRejectedRequest = async (studentRequestList, sssRequestList) => {
 }
 
 const getUpcomingDueDateRequest = async (as_ID) => {
-  var day1 = 0;
-  var day2 = 0;
-  var day3 = 0;
-  var day4 = 0;
-  var day5 = 0;
-  var day6 = 0;
-  var day7 = 0;
+  var day1 = 0; // curr day
+  var day2 = 0; // curr day + 1
+  var day3 = 0; // curr day + 2
+  var day4 = 0; // curr day + 3
+  var day5 = 0; // curr day + 4
+  var day6 = 0; // curr day + 5
+  var day7 = 0; // curr day + 6
   var dayDiff;
   var requestList = await databaseController.getAllAssignedRequest();
   if (requestList != null) {
     requestList.forEach((request) => {
       if (request.as_ID == as_ID) {
         dayDiff = (request.r_duedate - Date.now()) / 86400000;
+        dayDiff += 1; // offset current date = negative value
         if (dayDiff > 0 && dayDiff <= 1) {
           day1++;
         }
@@ -221,14 +222,14 @@ const getUpcomingDueDateRequest = async (as_ID) => {
     });
   }
   var dueDateObject = {
-    day1 : day1,
-    day2 : day2,
-    day3 : day3,
-    day4 : day4,
-    day5 : day5,
-    day6 : day6,
-    day7 : day7,
-  }
+    day1: day1,
+    day2: day2,
+    day3: day3,
+    day4: day4,
+    day5: day5,
+    day6: day6,
+    day7: day7,
+  };
 
   return dueDateObject;
 }
