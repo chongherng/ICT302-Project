@@ -46,6 +46,8 @@ app.use("/academic-staff", academicStaff);
 cron.schedule('0 0 0 * * *', () => {
   workflowController.notify48hrs();
   workflowController.notify24hrs();
+}, {
+  timezone: "Asia/Singapore"
 });
 
 app.listen(3000, () => console.log("Server started..."));

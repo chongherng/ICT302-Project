@@ -342,7 +342,7 @@ const notify48hrs = async () => {
   var requestList = await databaseController.getAllAssignedRequest();
   if(requestList != null) {
     requestList.forEach((request) => {
-      if((request.r_duedate - Date.now()) / 86400000 > 1 && (request.r_duedate - Date.now()) / 86400000 <= 2){
+      if(((request.r_duedate - Date.now()) / 86400000) + 1 > 1 && ((request.r_duedate - Date.now()) / 86400000) + 1 <= 2){
         academicStaffName = request.as_fname + " " + request.as_lname;
         var subject = "Reminder: 48 Hrs Left ";
         var content = `<p>Greetings ${academicStaffName}</p>
@@ -364,7 +364,7 @@ const notify24hrs = async () => {
 var requestList = await databaseController.getAllAssignedRequest();
   if(requestList != null) {
     requestList.forEach((request) => {
-      if((request.r_duedate - Date.now()) / 86400000 > 0 && (request.r_duedate - Date.now()) / 86400000 <= 1){
+      if(((request.r_duedate - Date.now()) / 86400000) + 1 > 0 && ((request.r_duedate - Date.now()) / 86400000) + 1 <= 1){
         academicStaffName = request.as_fname + " " + request.as_lname;
         var subject = "Reminder: 24 Hrs Left ";
         var content = `<p>Greetings ${academicStaffName}</p>
