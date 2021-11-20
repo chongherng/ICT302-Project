@@ -30,7 +30,7 @@
         <form action="/request/student/submit" id="Student_Support_Staff_Request_Form" method="POST" enctype="multipart/form-data" onsubmit="return valdidatecheck()">
             <label class="StudentID" for="StudentID"></label><br>
             <input type="text" id="StudentID" name="StudentID" placeholder="Student ID" required minlength="8" maxlength="8 "><br>
-            <select class="support-staff-dropdown" name="requestType" required>
+            <select id="support-staff-dropdown" name="requestType" onclick="f1()" required>
               <option value="" disabled selected >Select Request Category</option>
               <option value="Request to drop a unit">Request to drop a unit</option>
               <option value="Request for 3rd attempt">Request for 3rd attempt</option>
