@@ -14,7 +14,12 @@ const validateStudentForm = async (data, file) => {
             if (err) throw err;
         })
     }
-    throw "Missing entry";
+    if(student == null) {
+      throw "Invalid Student ID";
+    }
+    if(data.requestType == null) {
+      throw "Invalid Request Type";
+    }
   } 
   if(fileExt != "docx" && fileExt != "doc" && fileExt != "pdf") {
     throw "Invalid file type";
@@ -32,7 +37,12 @@ const validateSSSForm = async (data, file) => {
           if (err) throw err;
         });
     }
-    throw "Missing entry";
+    if(studentSupportStaff == null) {
+      throw "Invalid Student Support Staff ID";
+    }
+    if(data.requestType == null) {
+      throw "Invalid Request Type";
+    }
   }
   if (fileExt != "docx" && fileExt != "doc" && fileExt != "pdf") {
     throw "Invalid file type";
