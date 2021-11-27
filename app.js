@@ -5,7 +5,7 @@ const flash = require("express-flash");
 const session = require("express-session");
 const methodOverride = require("method-override");
 const cron = require('node-cron');
-const workflowController = require('../ICT302-Project/controllers/workflowController');
+const workflowController = require('./controllers/workflowController');
 
 const home = require("./routes/home");
 const request = require("./routes/request");
